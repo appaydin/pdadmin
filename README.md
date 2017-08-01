@@ -1,4 +1,5 @@
-pdadmin
+pdAdmin
 =======
 
-A Symfony project created on January 14, 2017, 5:55 pm.
+Symfony 3 & Vue.js 2 Full Restful Project
+Login with JWT (Json Web Token)
