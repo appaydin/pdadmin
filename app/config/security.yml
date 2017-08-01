@@ -1,0 +1,50 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+    firewalls:
+        # Symfony Profile Firewall
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        # Authorization Firewall
+        authentication:
+            pattern:  "^/%router_api%/auth"
+            stateless: true
+            anonymous: true
+            form_login:
+                check_path:               fos_user_security_login
+                username_parameter:       username
+                password_parameter:       password
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+
+        # API Firewall
+        api:
+            pattern:   "^/%router_api%"
+            stateless: true
+            anonymous: false
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        # Main Firewall
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: "^/%router_api%/auth/%router_login%",         roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/%router_api%/auth/%router_register%",      roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/%router_api%/auth/%router_reset%",         roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "^/%router_api%",                             roles: IS_AUTHENTICATED_FULLY }

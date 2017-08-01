@@ -1,0 +1,34 @@
+services:
+    pd.fos.user_login:
+        class: AccountBundle\Listener\LoginListener
+        tags:
+            - { name: kernel.event_subscriber, event: kernel.request }
+    pd.jwt.login_success:
+        class: AccountBundle\Listener\JWTAuthSuccessListener
+        arguments: ['@service_container', '@router']
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+    pd.jwt.login_failure:
+        class: AccountBundle\Listener\JWTAuthFailureListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
+    pd.jwt.token_expired:
+        class: AccountBundle\Listener\JWTExpiredListener
+        arguments: ['@router']
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_expired, method: onJWTExpired }
+    pd.jwt.token_not_found:
+        class: AccountBundle\Listener\JWTNotFoundListener
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_not_found, method: onJWTNotFound }
+    pd.jwt.token_invalid:
+        class: AccountBundle\Listener\JWTInvalidListener
+        arguments: ['@router']
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_invalid, method: onJWTInvalid }
+
+    # User Normalizer
+    pd.user.normalizer:
+        class: AccountBundle\Serializer\UserNormalizer
+        tags:
+            - { name: serializer.normalizer }

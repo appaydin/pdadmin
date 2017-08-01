@@ -1,0 +1,9 @@
+# Account Bundle
+account:
+    resource: "@AccountBundle/Resources/config/routing.yml"
+    prefix:   "/%router_api%"
+
+# Admin Bundle
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   "/%router_api%"

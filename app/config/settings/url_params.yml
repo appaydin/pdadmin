@@ -1,0 +1,9 @@
+parameters:
+    set_url_upload_dir: web/upload/
+    set_url_download_dir: web/download/
+    set_url_router_admin: admin
+    set_url_router_login: login
+    set_url_router_logincheck: login_check
+    set_url_router_logout: logout
+    set_url_router_register: register
+    set_url_router_resetting: forgot_password

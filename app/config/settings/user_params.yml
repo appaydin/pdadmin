@@ -1,0 +1,13 @@
+parameters:
+    user_enable_registration: true
+    user_enable_registration_redirecturl: fos_user_security_login
+    user_default_user_group: null
+    user_registration_email_sender: noreply@ottosistem.com
+    user_registration_email_name: asd
+    user_reset_email_sender: noreply@ottosistem.com
+    user_reset_email_name: asdsa
+    user_email_confirmation: true
+    user_enable_username: false
+    user_enable_current_password: false
+    user_login_redirect: admin_homepage
+    user_logout_redirect: fos_user_security_login

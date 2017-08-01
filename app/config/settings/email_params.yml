@@ -1,0 +1,14 @@
+parameters:
+    set_email_transport: gmail
+    set_email_host: null
+    set_email_port: null
+    set_email_username: ost2098@gmail.com
+    set_email_password: ost20982098
+    set_email_encryption: null
+    set_email_authmode: login
+    set_email_disable_delivery: false
+    set_email_antiflood_threshold: 99
+    set_email_antiflood_sleep: 0
+    set_email_sender_adress: iletisim@ramazanapaydin.com
+    set_email_test_email: website@ottosistem.com
+    set_email_sender_name: OTTOSISTEM

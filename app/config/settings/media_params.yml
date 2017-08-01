@@ -1,0 +1,21 @@
+parameters:
+    set_media_library: gd
+    set_media_day_directory: Y-m-d
+    set_media_optimize: 1
+    set_media_max_height: 1024
+    set_media_max_width: 768
+    set_media_quality: 80
+    set_media_watermark: text
+    set_media_watermark_imagepos: null
+    set_media_watermark_imagex: null
+    set_media_watermark_imagey: null
+    set_media_watermark_font: [2017/01/10/opensans-light65874ef0a2b2b7.ttf]
+    set_watermark_text: 'http://pdadmin.net'
+    set_watermark_fontsize: 36
+    set_watermark_color: '#445160'
+    set_watermark_align: center
+    set_watermark_valign: middle
+    set_watermark_x: 0.5
+    set_watermark_y: 0.5
+    set_watermark_angle: 45
+    set_media_watermark_image: null

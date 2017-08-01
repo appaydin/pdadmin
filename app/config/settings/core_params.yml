@@ -1,0 +1,18 @@
+parameters:
+    set_core_active_language: [en, tr]
+    set_core_twig_cache: '%kernel.cache_dir%/twig'
+    secret: 4a10b2934bf2cf8e185696dc860871b92029c2cb
+    set_core_validation_cache: validator.mapping.cache.symfony
+    set_core_doctrine_metadata_type: array
+    set_core_doctrine_metadata_host: localhost
+    set_core_doctrine_metadata_port: '11211'
+    set_core_doctrine_query_type: array
+    set_core_doctrine_query_host: localhost
+    set_core_doctrine_query_port: '11211'
+    set_core_doctrine_result_type: array
+    set_core_doctrine_result_host: localhost
+    set_core_doctrine_result_port: '11211'
+    set_core_symfony_cache: cache.adapter.filesystem
+    set_core_symfony_cache_provider: 'localhost:6379'
+    set_core_model_timezone: ''
+    set_core_view_timezone: ''

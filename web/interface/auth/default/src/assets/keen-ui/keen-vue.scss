@@ -1,0 +1,4853 @@
+/*================================================
+UiAlert.vue
+================================================*/
+$ui-alert-color             : rgba(black, 0.75) !default;
+$ui-alert-font-size         : rem-calc(15px) !default;
+$ui-alert-margin-bottom     : rem-calc(16px) !default;
+
+.ui-alert {
+  display: flex;
+  font-family: $font-stack;
+  font-size: $ui-alert-font-size;
+  line-height: 1.4;
+  margin-bottom: $ui-alert-margin-bottom;
+  overflow: hidden;
+  position: relative;
+  transition: margin-bottom 0.3s;
+  width: 100%;
+
+  a {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+
+.ui-alert__icon {
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin-right: rem-calc(12px);
+}
+
+.ui-alert__body {
+  align-items: center;
+  color: $ui-alert-color;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0;
+  margin-top: 0;
+  min-height: rem-calc(48px);
+  padding: rem-calc(12px 16px);
+  transition: opacity 0.3s, margin-top 0.4s;
+  width: 100%;
+}
+
+.ui-alert__content {
+  flex-grow: 1;
+}
+
+.ui-alert__dismiss-button {
+  align-self: flex-start;
+  flex-shrink: 0;
+  margin-bottom: rem-calc(-4px);
+  margin-left: rem-calc(8px);
+  margin-right: rem-calc(-8px);
+  margin-top: rem-calc(-4px);
+}
+
+// ================================================
+// Types
+// ================================================
+
+.ui-alert--type-info {
+  .ui-alert__body {
+    background-color: rgba($md-blue, 0.12);
+  }
+
+  .ui-alert__icon {
+    color: $md-blue;
+  }
+
+  a {
+    color: $md-blue;
+  }
+}
+
+.ui-alert--type-success {
+  .ui-alert__body {
+    background-color: rgba($md-green, 0.12);
+  }
+
+  .ui-alert__icon {
+    color: $md-green;
+  }
+
+  a {
+    color: $md-green;
+  }
+}
+
+.ui-alert--type-warning {
+  .ui-alert__body {
+    background-color: rgba($md-orange, 0.12);
+  }
+
+  .ui-alert__icon {
+    color: $md-orange;
+  }
+
+  a {
+    color: $md-orange;
+  }
+}
+
+.ui-alert--type-error  {
+  .ui-alert__body {
+    background-color: rgba($md-red, 0.12);
+  }
+
+  .ui-alert__icon {
+    color: $md-red;
+  }
+
+  a {
+    color: $md-red;
+  }
+}
+
+// ================================================
+// Transition
+// ================================================
+
+.ui-alert--transition-toggle-enter,
+.ui-alert--transition-toggle-leave-active {
+  margin-bottom: 0;
+
+  .ui-alert__body {
+    margin-top: rem-calc(-112px);
+    opacity: 0;
+  }
+}
+
+
+/*================================================
+UiAutocomplete.vue
+================================================*/
+.ui-autocomplete {
+  align-items: flex-start;
+  display: flex;
+  font-family: $font-stack;
+  margin-bottom: $ui-input-margin-bottom;
+  position: relative;
+
+  &:hover:not(.is-disabled) {
+    .ui-autocomplete__label-text {
+      color: $ui-input-label-color--hover;
+    }
+
+    .ui-autocomplete__input {
+      border-bottom-color: $ui-input-border-color--hover;
+    }
+  }
+
+  &.is-active:not(.is-disabled) {
+    .ui-autocomplete__label-text,
+    .ui-autocomplete__icon-wrapper .ui-icon {
+      color: $ui-input-label-color--active;
+    }
+
+    .ui-autocomplete__input {
+      border-bottom-color: $ui-input-border-color--active;
+      border-bottom-width: $ui-input-border-width--active;
+    }
+  }
+
+  &.has-floating-label {
+    .ui-autocomplete__label-text {
+      // Behaves like a block, but width is the width of its content.
+      // Needed here so label doesn't overflow parent when scaled.
+      display: table;
+
+      &.is-inline {
+        color: $ui-input-label-color; // So the hover styles don't override it
+        cursor: text;
+        transform: translateY($ui-input-label-top--inline) scale(1.1);
+      }
+
+      &.is-floating {
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  &.has-label {
+    .ui-autocomplete__icon-wrapper {
+      padding-top: $ui-input-icon-margin-top--with-label;
+    }
+
+    .ui-autocomplete__clear-button {
+      top: $ui-input-button-margin-top--with-label;
+    }
+  }
+
+  &.is-invalid:not(.is-disabled) {
+    .ui-autocomplete__label-text,
+    .ui-autocomplete__icon-wrapper .ui-icon {
+      color: $ui-input-label-color--invalid;
+    }
+
+    .ui-autocomplete__input {
+      border-bottom-color: $ui-input-border-color--invalid;
+    }
+
+    .ui-autocomplete__feedback {
+      color: $ui-input-feedback-color--invalid;
+    }
+  }
+
+  &.is-disabled {
+    .ui-autocomplete__input {
+      border-bottom-style: $ui-input-border-style--disabled;
+      border-bottom-width: $ui-input-border-width--active;
+      color: $ui-input-text-color--disabled;
+    }
+
+    .ui-autocomplete__icon-wrapper .ui-icon {
+      opacity: $ui-input-icon-opacity--disabled;
+    }
+
+    .ui-autocomplete__feedback {
+      opacity: $ui-input-feedback-opacity--disabled;
+    }
+  }
+}
+
+.ui-autocomplete__label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.ui-autocomplete__icon-wrapper {
+  flex-shrink: 0;
+  margin-right: $ui-input-icon-margin-right;
+  padding-top: $ui-input-icon-margin-top;
+
+  .ui-icon {
+    color: $ui-input-icon-color;
+  }
+}
+
+.ui-autocomplete__content {
+  flex-grow: 1;
+}
+
+.ui-autocomplete__label-text {
+  color: $ui-input-label-color;
+  font-size: $ui-input-label-font-size;
+  line-height: $ui-input-label-line-height;
+  margin-bottom: $ui-input-label-margin-bottom;
+  transform-origin: left;
+  transition: color 0.1s ease, transform 0.2s ease;
+}
+
+.ui-autocomplete__input {
+  background: none;
+  border: none;
+  border-bottom-color: $ui-input-border-color;
+  border-bottom-style: solid;
+  border-bottom-width: $ui-input-border-width;
+  border-radius: 0;
+  color: $ui-input-text-color;
+  cursor: auto;
+  font-family: $font-stack;
+  font-size: $ui-input-text-font-size;
+  font-weight: normal;
+  height: $ui-input-height;
+  outline: none;
+  padding: 0;
+  transition: border 0.1s ease;
+  width: 100%;
+
+  // Hide Edge and IE input clear button
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+.ui-autocomplete__clear-button {
+  color: $ui-input-button-color;
+  cursor: pointer;
+  font-size: $ui-input-button-size;
+  position: absolute;
+  right: 0;
+  top: $ui-input-button-margin-top;
+
+  &:hover {
+    color: $ui-input-button-color--hover;
+  }
+}
+
+.ui-autocomplete__suggestions {
+  background-color: white;
+  box-shadow: 1px 2px 8px $md-grey-600;
+  color: $primary-text-color;
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  margin-bottom: rem-calc(8px);
+  min-width: 100%;
+  padding: 0;
+  position: absolute;
+  z-index: $z-index-dropdown;
+}
+
+.ui-autocomplete__feedback {
+  color: $ui-input-feedback-color;
+  font-size: $ui-input-feedback-font-size;
+  line-height: $ui-input-feedback-line-height;
+  margin: 0;
+  padding-top: $ui-input-feedback-padding-top;
+  position: relative;
+}
+
+// ================================================
+// Icon positions
+// ================================================
+
+.ui-autocomplete--icon-position-right {
+  .ui-autocomplete__icon-wrapper {
+    margin-left: rem-calc(8px);
+    margin-right: 0;
+    order: 1;
+  }
+}
+
+
+/*================================================
+UiAutocompleteSuggestion.vue
+================================================*/
+.ui-autocomplete-suggestion {
+  cursor: pointer;
+  font-family: $font-stack;
+  font-size: $ui-dropdown-item-font-size;
+  padding: rem-calc(8px 12px);
+
+  &:hover {
+    background-color: rgba(black, 0.06);
+  }
+
+  &.is-highlighted {
+    background-color: rgba(black, 0.1);
+  }
+}
+
+.ui-autocomplete-suggestion__image {
+  @include text-truncation;
+  align-items: center;
+  display: flex;
+}
+
+.ui-autocomplete-suggestion__image-object {
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 50%;
+  height: rem-calc(32px);
+  margin-right: rem-calc(12px);
+  width: rem-calc(32px);
+}
+
+
+/*================================================
+UiButton.vue
+================================================*/
+.ui-button {
+  align-items: center;
+  background: none;
+  border-radius: $ui-default-border-radius;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: $font-stack;
+  font-size: $ui-button-font-size;
+  font-weight: 500;
+  height: $ui-button-height;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  min-width: rem-calc(80px);
+  outline: none;
+  overflow: hidden;
+  padding: 0;
+  padding-left: rem-calc(16px);
+  padding-right: rem-calc(16px);
+  position: relative;
+  text-transform: uppercase;
+  touch-action: manipulation; // IE
+
+  // Remove the Firefox dotted outline
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &.has-focus-ring:focus,
+  body[modality="keyboard"] &:focus {
+    .ui-button__focus-ring {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &.is-raised {
+    box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
+    transition: box-shadow 0.1s;
+
+    &.has-focus-ring:focus,
+    body[modality="keyboard"] &:focus {
+      box-shadow: 0 0 5px rgba(black, 0.22), 0 3px 6px rgba(black, 0.3);
+    }
+  }
+
+  &.is-loading {
+    .ui-button__content {
+      opacity: 0;
+    }
+  }
+
+  &.is-disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.ui-button__content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative; // IE: prevents shifting when the button is pressed
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.ui-button__icon {
+  margin-left: rem-calc(-4px);
+  margin-right: rem-calc(6px);
+  margin-top: rem-calc(-2px);
+}
+
+.ui-button__dropdown-icon {
+  font-size: rem-calc(18px);
+  margin-left: rem-calc(2px);
+  margin-right: rem-calc(-6px);
+}
+
+.ui-button__focus-ring {
+  background-color: rgba(black, 0.12);
+  border-radius: 50%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ui-progress-circular.ui-button__progress {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ui-button-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// ================================================
+// Icon positions
+// ================================================
+
+.ui-button--icon-position-right {
+  .ui-button__icon {
+    margin-left: rem-calc(6px);
+    margin-right: rem-calc(-4px);
+    order: 1;
+  }
+}
+
+// ================================================
+// Sizes
+// ================================================
+
+.ui-button--size-small {
+  font-size: $ui-button-font-size--small;
+  height: $ui-button-height--small;
+  padding-left: rem-calc(12px);
+  padding-right: rem-calc(12px);
+
+  .ui-button__icon {
+    margin-left: 0;
+    margin-top: 0;
+
+    .ui-icon {
+      font-size: rem-calc(18px);
+    }
+  }
+
+  .ui-button__dropdown-icon {
+    margin-right: rem-calc(-4px);
+  }
+
+  &.ui-button--icon-position-right {
+    .ui-button__icon {
+      margin-left: rem-calc(6px);
+      margin-right: 0;
+    }
+  }
+}
+
+.ui-button--size-large {
+  font-size: $ui-button-font-size--large;
+  height: $ui-button-height--large;
+  padding-left: rem-calc(24px);
+  padding-right: rem-calc(24px);
+
+  .ui-button__icon {
+    margin-left: rem-calc(-4px);
+    margin-right: rem-calc(8px);
+  }
+
+  .ui-button__dropdown-icon {
+    font-size: rem-calc(24px);
+    margin-left: rem-calc(4px);
+  }
+
+  &.ui-button--icon-position-right {
+    .ui-button__icon {
+      margin-left: rem-calc(8px);
+      margin-right: rem-calc(-4px);
+    }
+  }
+}
+
+// ================================================
+// Types and colors
+// ================================================
+
+.ui-button--type-primary {
+  &.ui-button--color-default {
+    background-color: $md-grey-200;
+    color: $primary-text-color;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open,
+    &.has-focus-ring:focus,
+    body[modality="keyboard"] &:focus {
+      background-color: darken($md-grey-200, 7.5%);
+    }
+
+    .ui-ripple-ink__ink {
+      opacity: 0.2;
+    }
+
+    .ui-button__icon,
+    .ui-button__dropdown-icon {
+      color: $secondary-text-color;
+    }
+  }
+
+  &.ui-button--color-primary,
+  &.ui-button--color-accent,
+  &.ui-button--color-green,
+  &.ui-button--color-orange,
+  &.ui-button--color-red {
+    color: white;
+
+    .ui-ripple-ink__ink {
+      opacity: 0.4;
+    }
+  }
+
+  &.ui-button--color-primary {
+    background-color: $brand-primary-color;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open,
+    &.has-focus-ring:focus,
+    body[modality="keyboard"] &:focus {
+      background-color: darken($brand-primary-color, 10%);
+    }
+  }
+
+  &.ui-button--color-accent {
+    background-color: $brand-accent-color;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open,
+    &.has-focus-ring:focus,
+    body[modality="keyboard"] &:focus {
+      background-color: darken($brand-accent-color, 10%);
+    }
+  }
+
+  &.ui-button--color-green {
+    background-color: $md-green;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open,
+    &.has-focus-ring:focus,
+    body[modality="keyboard"] &:focus {
+      background-color: darken($md-green, 10%);
+    }
+  }
+
+  &.ui-button--color-orange {
+    background-color: $md-orange;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open,
+    &.has-focus-ring:focus,
+    body[modality="keyboard"] &:focus {
+      background-color: darken($md-orange, 10%);
+    }
+  }
+
+  &.ui-button--color-red {
+    background-color: $md-red;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open,
+    &.has-focus-ring:focus,
+    body[modality="keyboard"] &:focus {
+      background-color: darken($md-red, 10%);
+    }
+  }
+}
+
+.ui-button--type-secondary {
+  background-color: transparent;
+
+  &:hover:not(.is-disabled),
+  &.has-dropdown-open,
+  &.has-focus-ring:focus,
+  body[modality="keyboard"] &:focus {
+    background-color: darken($md-grey-200, 3%);
+  }
+
+  &.ui-button--color-default {
+    color: $primary-text-color;
+
+    .ui-button__icon {
+      color: $secondary-text-color;
+    }
+  }
+
+  &.ui-button--color-primary {
+    color: $brand-primary-color;
+  }
+
+  &.ui-button--color-accent {
+    color: $brand-accent-color;
+  }
+
+  &.ui-button--color-green {
+    color: $md-green-600;
+  }
+
+  &.ui-button--color-orange {
+    color: $md-orange;
+  }
+
+  &.ui-button--color-red {
+    color: $md-red;
+  }
+}
+
+
+/*================================================
+UiCalendar.vue
+================================================*/
+$ui-calendar-padding    : rem-calc(8px) !default;
+
+.ui-calendar {
+  color: $primary-text-color;
+}
+
+.ui-calendar__header {
+  color: white;
+  line-height: 1;
+  padding: rem-calc(16px);
+}
+
+.ui-calendar__header-year,
+.ui-calendar__header-details {
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+
+  &:hover,
+  body[modality="keyboard"] &:focus,
+  &.is-active {
+    opacity: 1;
+  }
+
+  body[modality="keyboard"] &:focus {
+    outline: 1px dotted white;
+    outline-offset: 1px;
+  }
+}
+
+.ui-calendar__header-year {
+  font-size: rem-calc(15px);
+  font-weight: 500;
+  margin-bottom: rem-calc(8px);
+}
+
+.ui-calendar__header-details {
+  font-size: rem-calc(22px)
+}
+
+.ui-calendar__body {
+  height: ($ui-calendar-cell-size * 6) + $ui-calendar-controls-height +
+        $ui-calendar-month-header-height  + ($ui-calendar-padding * 2);
+  overflow: hidden;
+  padding: $ui-calendar-padding;
+  position: relative;
+  width: ($ui-calendar-cell-size * 7) + ($ui-calendar-padding * 2);
+}
+
+.ui-calendar__years {
+  height: rem-calc(312px);
+  list-style: none;
+  margin: -$ui-calendar-padding;
+  overflow-y: auto;
+  padding: rem-calc(8px 0);
+}
+
+.ui-calendar__year {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-size: rem-calc(16px);
+  height: rem-calc(36px);
+  justify-content: center;
+  outline: none;
+
+  &.is-selected {
+    font-size: rem-calc(24px);
+    font-weight: 500;
+    height: rem-calc(40px);
+  }
+}
+
+// ================================================
+// Orientations
+// ================================================
+
+.ui-calendar--orientation-landscape {
+  display: flex;
+
+  .ui-calendar__header {
+    min-width: rem-calc(128px);
+  }
+
+  .ui-calendar__header-date {
+    margin-bottom: rem-calc(12px);
+  }
+
+  .ui-calendar__header-date {
+    display: block;
+    padding-top: rem-calc(4px);
+  }
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-calendar--color-primary {
+  .ui-calendar__header {
+    background-color: $brand-primary-color;
+  }
+
+  .ui-calendar__year {
+    &:hover,
+    body[modality="keyboard"] &:focus {
+      color: $brand-primary-color;
+    }
+
+    &.is-selected {
+      color: $brand-primary-color;
+    }
+  }
+
+  .ui-calendar-week__date {
+    &.is-today {
+      color: $brand-primary-color;
+    }
+
+    &.is-selected,
+    body[modality="keyboard"] &.is-selected {
+      background-color: $brand-primary-color;
+    }
+  }
+}
+
+.ui-calendar--color-accent {
+  .ui-calendar__header {
+    background-color: $brand-accent-color;
+  }
+
+  .ui-calendar__year {
+    &:hover,
+    body[modality="keyboard"] &:focus {
+      color: $brand-accent-color;
+    }
+
+    &.is-selected {
+      color: $brand-accent-color;
+    }
+  }
+
+  .ui-calendar-week__date {
+    &.is-today {
+      color: $brand-accent-color;
+    }
+
+    &.is-selected,
+    body[modality="keyboard"] &.is-selected {
+      background-color: $brand-accent-color;
+    }
+  }
+}
+
+
+/*================================================
+UiCalendarControls.vue
+================================================*/
+.ui-calendar-controls {
+  align-items: center;
+  display: flex;
+  height: $ui-calendar-controls-height;
+  justify-content: space-between;
+}
+
+.ui-calendar-controls__month-and-year {
+  font-size: rem-calc(15px);
+}
+
+
+/*================================================
+UiCalendarMonth.vue
+================================================*/
+.ui-calendar-month {
+  height: ($ui-calendar-cell-size * 6) + $ui-calendar-month-header-height;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.ui-calendar-month__header {
+  align-items: center;
+  display: flex;
+  height: $ui-calendar-month-header-height;
+  justify-content: space-around;
+  width: 100%;
+
+  span {
+    align-items: center;
+    color: $secondary-text-color;
+    display: flex;
+    font-size: rem-calc(14px);
+    height: $ui-calendar-cell-size;
+    justify-content: center;
+    text-transform: uppercase;
+    width: $ui-calendar-cell-size;
+  }
+}
+
+.ui-calendar-month__week {
+  $week-width: $ui-calendar-cell-size * 7;
+  position: absolute;
+  width: $week-width;
+
+  &.is-current {
+    left: 0;
+  }
+
+  &.is-other {
+    left: $week-width;
+
+    &.ui-calendar-month--slide-right {
+      left: -$week-width;
+    }
+  }
+
+  &.is-sliding {
+    transition: transform 250ms ease;
+
+    &.ui-calendar-month--slide-left {
+      transform: translate3d(-$week-width, 0, 0);
+    }
+
+    &.ui-calendar-month--slide-right {
+      transform: translate3d($week-width, 0, 0);
+    }
+  }
+}
+
+
+/*================================================
+UiCalendarWeek.vue
+================================================*/
+.ui-calendar-week {
+  display: flex;
+  font-size: rem-calc(14px);
+  width: 100%;
+}
+
+.ui-calendar-week__date {
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  height: $ui-calendar-cell-size;
+  justify-content: center;
+  outline: none;
+  text-align: center;
+  width: $ui-calendar-cell-size;
+
+  &:hover,
+  body[modality="keyboard"] &:focus {
+    background-color: rgba(black, 0.1);
+  }
+
+  &.is-in-other-month {
+    visibility: hidden;
+  }
+
+  &.is-today {
+    font-weight: bold;
+    // color is defined in UiCalendar
+
+    &.is-selected {
+      color: white;
+    }
+  }
+
+  &.is-selected {
+    color: white;
+    // background color is defined in UiCalendar
+  }
+
+  &.is-disabled {
+    background-color: transparent;
+    cursor: default;
+    opacity: 0.4;
+  }
+}
+
+
+/*================================================
+UiCheckbox.vue
+================================================*/
+$ui-checkbox-border-width           : rem-calc(2px) !default;
+$ui-checkbox-checkmark-width        : rem-calc(2px) !default;
+$ui-checkbox-transition-duration    : 0.15s !default;
+$ui-checkbox-label-font-size        : rem-calc(16px) !default;
+
+$ui-checkbox-size                   : rem-calc(20px); // no !default as it shouldn't be overridden
+$ui-checkbox-focus-ring-size        : $ui-checkbox-size * 2.1;
+
+.ui-checkbox {
+  align-items: center;
+  display: flex;
+  font-family: $font-stack;
+  font-weight: normal;
+  margin: 0;
+  margin-bottom: rem-calc(8px);
+  position: relative;
+
+  &:not(.is-disabled):not(.is-checked):hover,
+  &:not(.is-disabled):not(.is-checked).is-active {
+    .ui-checkbox__checkmark::before {
+      border-color: rgba(black, 0.6);
+    }
+  }
+
+  &.is-checked {
+    .ui-checkbox__checkmark::after {
+      border-bottom: $ui-checkbox-checkmark-width solid white;
+      border-right: $ui-checkbox-checkmark-width solid white;
+      opacity: 1;
+    }
+  }
+
+  &.is-disabled {
+    .ui-checkbox__checkmark,
+    .ui-checkbox__label-text {
+      color: $disabled-text-color;
+      cursor: default;
+    }
+
+    .ui-checkbox__checkmark::before {
+      border-color: rgba(black, 0.26);
+    }
+
+    &.is-checked {
+      .ui-checkbox__checkmark::before {
+        background-color: rgba(black, 0.26);
+        border: none;
+      }
+    }
+  }
+}
+
+.ui-checkbox__label-text {
+  cursor: pointer;
+  font-size: $ui-checkbox-label-font-size;
+  margin-left: rem-calc(8px);
+}
+
+.ui-checkbox__checkmark {
+  background-color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+  height: $ui-checkbox-size;
+  position: relative;
+  width: $ui-checkbox-size;
+
+  // Background
+  &::before {
+    border-radius: $ui-default-border-radius;
+    border: $ui-checkbox-border-width solid $hint-text-color;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  // Checkmark
+  &::after {
+    bottom: rem-calc(5px);
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: rem-calc(13px);
+    left: rem-calc(7px);
+    opacity: 0;
+    position: absolute;
+    transform: rotate(45deg);
+    transition-delay: 0.1s;
+    transition: opacity 0.3s ease;
+    width: rem-calc(6px);
+  }
+}
+
+.ui-checkbox__input {
+  position: absolute;
+  opacity: 0;
+
+  body[modality="keyboard"] &:focus + .ui-checkbox__checkmark {
+    .ui-checkbox__focus-ring {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.ui-checkbox__focus-ring {
+  border-radius: 50%;
+  height: $ui-checkbox-focus-ring-size;
+  margin-left: -($ui-checkbox-focus-ring-size - $ui-checkbox-size) / 2;
+  margin-top: -($ui-checkbox-focus-ring-size - $ui-checkbox-size) / 2;
+  opacity: 0;
+  position: absolute;
+  transform: scale(0);
+  transition-duration: $ui-checkbox-transition-duration;
+  transition-property: opacity, transform;
+  transition-timing-function: ease-out;
+  width: $ui-checkbox-focus-ring-size;
+  background-color: rgba(black, 0.12);
+}
+
+// ================================================
+// Box Positions
+// ================================================
+
+.ui-checkbox--box-position-right {
+  .ui-checkbox__label-text {
+    margin-left: 0;
+    margin-right: auto;
+    order: -1;
+  }
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-checkbox--color-primary {
+  &:not(.is-disabled).is-checked:hover,
+  &:not(.is-disabled).is-checked.is-active {
+    .ui-checkbox__checkmark::before {
+      background-color: darken($brand-primary-color, 5%);
+      border-color: darken($brand-primary-color, 5%);
+    }
+  }
+
+  &.is-checked {
+    .ui-checkbox__checkmark::before {
+      background-color: $brand-primary-color;
+      border-color: $brand-primary-color;
+    }
+
+    .ui-checkbox__focus-ring {
+      background-color: rgba($brand-primary-color, 0.18);
+    }
+  }
+}
+
+.ui-checkbox--color-accent {
+  &:not(.is-disabled).is-checked:hover,
+  &:not(.is-disabled).is-checked.is-active {
+    .ui-checkbox__checkmark::before {
+      background-color: darken($brand-accent-color, 5%);
+      border-color: darken($brand-accent-color, 5%);
+    }
+  }
+
+  &.is-checked {
+    .ui-checkbox__checkmark::before {
+      background-color: $brand-accent-color;
+      border-color: $brand-accent-color;
+    }
+
+    .ui-checkbox__focus-ring {
+      background-color: rgba($brand-accent-color, 0.18);
+    }
+  }
+}
+
+
+/*================================================
+UiCheckboxGroup.vue
+================================================*/
+.ui-checkbox-group {
+  font-family: $font-stack;
+  line-height: normal;
+
+  &:not(.is-disabled):not(.is-invalid):hover {
+    .ui-checkbox-group__label-text {
+      color: $ui-input-label-color--hover;
+    }
+  }
+
+  &:not(.is-disabled):not(.is-invalid).is-active {
+    .ui-checkbox-group__label-text {
+      color: $ui-input-label-color--active;
+    }
+  }
+
+  &.is-vertical {
+    .ui-checkbox-group__checkboxes {
+      flex-direction: column;
+      padding-top: rem-calc(8px);
+    }
+
+    .ui-checkbox-group__checkbox {
+      margin-bottom: rem-calc(12px);
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+  &.is-invalid {
+    .ui-checkbox-group__label-text {
+      color: $ui-input-label-color--invalid;
+    }
+
+    .ui-checkbox-group__feedback {
+      color: $ui-input-feedback-color--invalid;
+    }
+  }
+
+  &.is-disabled {
+    .ui-checkbox-group__feedback {
+      opacity: $ui-input-feedback-opacity--disabled;
+    }
+  }
+}
+
+.ui-checkbox-group__label-text {
+  color: $ui-input-label-color;
+  font-size: $ui-input-label-font-size;
+  transition: color 0.1s ease;
+}
+
+.ui-checkbox-group__checkboxes {
+  align-items: center;
+  display: flex;
+  min-height: $ui-input-height;
+}
+
+.ui-checkbox.ui-checkbox-group__checkbox {
+  margin-bottom: 0;
+  margin-left: rem-calc(24px);
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.ui-checkbox-group__feedback {
+  color: $ui-input-feedback-color;
+  font-size: $ui-input-feedback-font-size;
+  line-height: $ui-input-feedback-line-height;
+  margin: 0;
+  padding-top: $ui-input-feedback-padding-top - rem-calc(4px);
+  position: relative;
+}
+
+// ================================================
+// Box Positions
+// ================================================
+
+.ui-checkbox-group--box-position-right {
+  &:not(.is-vertical) {
+    .ui-checkbox__label-text {
+      margin-right: rem-calc(8px);
+    }
+  }
+}
+
+
+/*================================================
+UiCloseButton.vue
+================================================*/
+.ui-close-button {
+  align-items: center;
+  background-color: transparent;
+  background: none;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+
+  // Fix for border radius not clipping internal content of positioned elements (Chrome/Opera)
+  -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+
+  // Remove the Firefox dotted outline
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover:not(.is-disabled) {
+    background-color: rgba(black, 0.1);
+  }
+
+  body[modality="keyboard"] &:focus {
+    .ui-close-button__focus-ring {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &.is-disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.ui-close-button__icon {
+  position: relative; // IE: prevents shifting when the button is pressed
+  width: 100%; // Firefox: needs the width reset for Flexbox centering
+  z-index: 1;
+}
+
+.ui-close-button__focus-ring {
+  background-color: rgba(black, 0.15);
+  border-radius: 50%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+// ================================================
+// Sizes
+// ================================================
+
+.ui-close-button--size-small {
+  &,
+  .ui-close-button__focus-ring {
+    height: rem-calc(32px);
+    width: rem-calc(32px);
+  }
+
+  .ui-icon {
+    font-size: rem-calc(18px);
+  }
+}
+
+.ui-close-button--size-normal {
+  &,
+  .ui-close-button__focus-ring {
+    height: rem-calc(36px);
+    width: rem-calc(36px);
+  }
+
+  .ui-icon {
+    font-size: rem-calc(20px);
+  }
+}
+
+.ui-close-button--size-large {
+  &,
+  .ui-close-button__focus-ring {
+    height: rem-calc(48px);
+    width: rem-calc(48px);
+  }
+
+  .ui-icon {
+    font-size: rem-calc(24px);
+  }
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-close-button--color-black {
+  body[modality="keyboard"] &:focus,
+  &:hover:not(.is-disabled) {
+    .ui-close-button__icon {
+      color: $primary-text-color;
+    }
+  }
+
+  .ui-close-button__icon {
+    color: rgba(black, 0.38);
+  }
+}
+
+.ui-close-button--color-white {
+  body[modality="keyboard"] &:focus,
+  &:hover:not(.is-disabled) {
+    .ui-close-button__icon {
+      color: white;
+    }
+  }
+
+  .ui-close-button__icon {
+    color: $secondary-text-color;
+  }
+}
+
+
+/*================================================
+UiCollapsible.vue
+================================================*/
+$ui-collapsible-header-background           : $md-grey-200 !default;
+$ui-collapsible-header-background-hover     : $md-grey-300 !default;
+
+.ui-collapsible {
+  font-family: $font-stack;
+  margin-bottom: rem-calc(8px);
+  width: 100%;
+
+  &:not(.is-disabled) {
+    .ui-collapsible__header {
+      &:hover,
+      body[modality="keyboard"] &:focus {
+        background-color: $ui-collapsible-header-background-hover;
+      }
+    }
+  }
+
+  &.is-open {
+    .ui-collapsible__header-icon {
+      transform: rotate(-180deg);
+    }
+  }
+
+  &.is-disabled {
+    .ui-collapsible__header {
+      cursor: default;
+      opacity: 0.6;
+    }
+
+    .ui-collapsible__header-icon {
+      cursor: default;
+    }
+  }
+}
+
+.ui-collapsible__header {
+  align-items: center;
+  background-color: $ui-collapsible-header-background;
+  cursor: pointer;
+  display: flex;
+  font-size: rem-calc(15px);
+  line-height: 1.5;
+  margin: 0;
+  min-height: rem-calc(48px);
+  padding: rem-calc(12px 16px);
+  position: relative;
+  touch-action: manipulation; // IE
+  width: 100%;
+
+  .ui-ripple-ink__ink {
+    opacity: 0.1;
+  }
+}
+
+.ui-collapsible__header-content {
+  padding-right: rem-calc(8px);
+}
+
+.ui-collapsible__header-icon {
+  color: $secondary-text-color;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: rem-calc(-4px);
+  transition: transform 0.3s ease;
+}
+
+.ui-collapsible__body-wrapper {
+  height: initial;
+  overflow: hidden;
+}
+
+.ui-collapsible__body {
+  border-top: 0;
+  border: 1px solid $md-grey-200;
+  display: block;
+  padding: rem-calc(16px);
+  width: 100%;
+}
+
+.ui-collapsible--transition-toggle-enter-active,
+.ui-collapsible--transition-toggle-leave-active {
+  transition: height 0.3s ease;
+}
+
+.ui-collapsible--transition-toggle-enter,
+.ui-collapsible--transition-toggle-leave-active {
+  height: 0!important;
+}
+
+
+/*================================================
+UiConfirm.vue
+================================================*/
+.ui-confirm__message {
+  font-family: $font-stack;
+  font-size: rem-calc(15px);
+}
+
+.ui-confirm__footer {
+  display: flex;
+}
+
+
+/*================================================
+UiDatepicker.vue
+================================================*/
+.ui-datepicker {
+  align-items: flex-start;
+  display: flex;
+  font-family: $font-stack;
+  margin-bottom: $ui-input-margin-bottom;
+  outline: none;
+  position: relative;
+
+  &:hover:not(.is-disabled) {
+    .ui-datepicker__label-text {
+      color: $ui-input-label-color--hover;
+    }
+
+    .ui-datepicker__display {
+      border-bottom-color: $ui-input-border-color--hover;
+    }
+
+    .ui-datepicker__dropdown-button {
+      color: $ui-input-button-color--hover;
+    }
+  }
+
+  &.is-active:not(.is-disabled) {
+    .ui-datepicker__label-text,
+    .ui-datepicker__icon-wrapper .ui-icon {
+      color: $ui-input-label-color--active;
+    }
+
+    .ui-datepicker__display {
+      border-bottom-color: $ui-input-border-color--active;
+      border-bottom-width: $ui-input-border-width--active;
+    }
+  }
+
+  &.has-floating-label {
+    .ui-datepicker__label-text {
+      // Behaves like a block, but width is the width of its content.
+      // Needed here so label doesn't overflow parent when scaled.
+      display: table;
+
+      &.is-inline {
+        color: $ui-input-label-color; // So the hover styles don't override it
+        cursor: pointer;
+        transform: translateY($ui-input-label-top--inline) scale(1.1);
+      }
+
+      &.is-floating {
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  &.has-label {
+    .ui-datepicker__icon-wrapper {
+      padding-top: $ui-input-icon-margin-top--with-label;
+    }
+
+    .ui-datepicker__dropdown-button {
+      top: $ui-input-button-margin-top--with-label;
+    }
+  }
+
+  &.is-invalid:not(.is-disabled) {
+    .ui-datepicker__label-text,
+    .ui-datepicker__icon-wrapper .ui-icon {
+      color: $ui-input-label-color--invalid;
+    }
+
+    .ui-datepicker__display {
+      border-bottom-color: $ui-input-border-color--invalid;
+    }
+
+    .ui-datepicker__feedback {
+      color: $ui-input-feedback-color--invalid;
+    }
+  }
+
+  &.is-disabled {
+    .ui-datepicker__display {
+      border-bottom-style: $ui-input-border-style--disabled;
+      border-bottom-width: $ui-input-border-width--active;
+      color: $ui-input-text-color--disabled;
+      cursor: default;
+    }
+
+    .ui-datepicker__dropdown-button,
+    .ui-datepicker__display-value.is-placeholder {
+      color: $ui-input-text-color--disabled;
+      opacity: $ui-input-button-opacity--disabled;
+    }
+
+    .ui-datepicker__icon-wrapper .ui-icon {
+      opacity: $ui-input-icon-opacity--disabled;
+    }
+
+    .ui-datepicker__feedback {
+      opacity: $ui-input-feedback-opacity--disabled;
+    }
+  }
+
+  .ui-modal:not(.has-footer) .ui-modal__body {
+    padding: 0;
+
+    .ui-calendar__body {
+      height: rem-calc(348px);
+    }
+  }
+
+  .ui-modal__container {
+    width: rem-calc(268px);
+  }
+}
+
+.ui-datepicker__label {
+  display: block;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.ui-datepicker__icon-wrapper {
+  flex-shrink: 0;
+  margin-right: $ui-input-icon-margin-right;
+  padding-top: $ui-input-icon-margin-top;
+
+  .ui-icon {
+    color: $ui-input-icon-color;
+  }
+}
+
+.ui-datepicker__content {
+  flex-grow: 1;
+}
+
+.ui-datepicker__label-text {
+  color: $ui-input-label-color;
+  font-size: $ui-input-label-font-size;
+  line-height: $ui-input-label-line-height;
+  margin-bottom: $ui-input-label-margin-bottom;
+  transform-origin: left;
+  transition: color 0.1s ease, transform 0.2s ease;
+}
+
+.ui-datepicker__display {
+  align-items: center;
+  border: none;
+  border-bottom-color: $ui-input-border-color;
+  border-bottom-style: solid;
+  border-bottom-width: $ui-input-border-width;
+  color: $ui-input-text-color;
+  cursor: pointer;
+  display: flex;
+  font-family: $font-stack;
+  font-size: $ui-input-text-font-size;
+  font-weight: normal;
+  height: $ui-input-height;
+  line-height: 1;
+  padding: 0;
+  transition: border 0.1s ease;
+  user-select: none;
+  width: 100%;
+}
+
+.ui-datepicker__display-value {
+  flex-grow: 1;
+
+  &.is-placeholder {
+    color: $hint-text-color;
+  }
+}
+
+.ui-datepicker__dropdown-button {
+  color: $ui-input-button-color;
+  font-size: $ui-input-button-size;
+  margin-left: auto;
+  margin-right: rem-calc(-4px);
+}
+
+.ui-datepicker__feedback {
+  color: $ui-input-feedback-color;
+  font-size: $ui-input-feedback-font-size;
+  line-height: $ui-input-feedback-line-height;
+  margin: 0;
+  padding-top: $ui-input-feedback-padding-top;
+  position: relative;
+}
+
+.ui-datepicker__modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  .ui-button {
+    min-width: rem-calc(64px);
+  }
+}
+
+// ================================================
+// Icon Positions
+// ================================================
+
+.ui-datepicker--icon-position-right {
+  .ui-datepicker__icon-wrapper {
+    margin-left: rem-calc(8px);
+    margin-right: 0;
+    order: 1;
+  }
+}
+
+// ================================================
+// Orientations
+// ================================================
+
+.ui-datepicker--orientation-landscape {
+  .ui-modal__container {
+    width: rem-calc(396px);
+  }
+}
+
+
+/*================================================
+UiFab.vue
+================================================*/
+$ui-fab-size--normal    : rem-calc(56px) !default;
+$ui-fab-size--small     : rem-calc(40px) !default;
+
+.ui-fab {
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 2px 5px 0 rgba(black, 0.2), 0 2px 10px 0 rgba(black, 0.16);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+  z-index: $z-index-fab;
+
+  // Remove the Firefox dotted outline
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &:hover,
+  body[modality="keyboard"] &:focus {
+    box-shadow: 0 8px 17px 0 rgba(black, 0.25), 0 6px 20px 0 rgba(black, 0.2);
+  }
+
+  body[modality="keyboard"] &:focus {
+    .ui-fab__focus-ring {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .ui-ripple-ink {
+    border-radius: 50%;
+  }
+}
+
+.ui-fab__icon {
+  height: initial;
+  margin: 0;
+  position: relative;
+  width: 100%; // Firefox: needs the width and height reset for flexbox centering
+  z-index: 1;
+}
+
+.ui-fab__focus-ring {
+  border-radius: 50%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+// ================================================
+// Sizes
+// ================================================
+
+.ui-fab--size-normal {
+  &,
+  .ui-fab__focus-ring {
+    height: $ui-fab-size--normal;
+    width: $ui-fab-size--normal;
+  }
+}
+
+.ui-fab--size-small {
+  &,
+  .ui-fab__focus-ring {
+    width: $ui-fab-size--small;
+    height: $ui-fab-size--small;
+  }
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-fab--color-default {
+  background-color: white;
+  color: $secondary-text-color;
+
+  .ui-fab__icon {
+    color: $secondary-text-color;
+  }
+
+  .ui-ripple-ink__ink {
+    opacity: 0.2;
+  }
+
+  .ui-fab__focus-ring {
+    background-color: rgba(black, 0.15);
+  }
+}
+
+.ui-fab--color-primary,
+.ui-fab--color-accent {
+  color: white;
+
+  .ui-fab__icon {
+    color: white;
+  }
+
+  .ui-ripple-ink__ink {
+    opacity: 0.4;
+  }
+}
+
+.ui-fab--color-primary {
+  background-color: $brand-primary-color;
+
+  .ui-fab__focus-ring {
+    background-color: darken($brand-primary-color, 10%);
+  }
+}
+
+.ui-fab--color-accent {
+  background-color: $brand-accent-color;
+
+  .ui-fab__focus-ring {
+    background-color: darken($brand-accent-color, 10%);
+  }
+}
+
+
+/*================================================
+UiFileupload.vue
+================================================*/
+.ui-fileupload {
+  align-items: center;
+  border-radius: $ui-default-border-radius;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: $font-stack;
+  font-size: $ui-button-font-size;
+  font-weight: 500;
+  height: $ui-button-height;
+  justify-content: center;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  min-width: rem-calc(80px);
+  overflow: hidden;
+  padding: 0;
+  padding-left: rem-calc(16px);
+  padding-right: rem-calc(16px);
+  position: relative;
+  text-transform: uppercase;
+
+  &.has-focus-ring.is-active,
+  body[modality="keyboard"] &.is-active {
+    .ui-fileupload__focus-ring {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &:not(.is-multiple) {
+    .ui-fileupload__display-text {
+      text-transform: none;
+    }
+  }
+
+  &.is-raised {
+    box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
+    transition: box-shadow 0.1s;
+
+    &.has-focus-ring.is-active,
+    body[modality="keyboard"] &.is-active {
+      box-shadow: 0 0 5px rgba(black, 0.22), 0 3px 6px rgba(black, 0.3);
+    }
+  }
+
+  &.is-disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.ui-fileupload__input {
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  width: 0.1px;
+}
+
+.ui-fileupload__content {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.ui-fileupload__icon {
+  margin-left: rem-calc(-4px);
+  margin-right: rem-calc(6px);
+  margin-top: rem-calc(-2px);
+}
+
+.ui-fileupload__focus-ring {
+  background-color: rgba(black, 0.12);
+  border-radius: 50%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+// ================================================
+// Icon positions
+// ================================================
+
+.ui-fileupload--icon-position-right {
+  .ui-fileupload__icon {
+    margin-left: rem-calc(6px);
+    margin-right: rem-calc(-4px);
+    order: 1;
+  }
+}
+
+// ================================================
+// Sizes
+// ================================================
+
+.ui-fileupload--size-small {
+  font-size: $ui-button-font-size--small;
+  height: $ui-button-height--small;
+  padding-left: rem-calc(12px);
+  padding-right: rem-calc(12px);
+
+  .ui-fileupload__icon {
+    margin-left: 0;
+    margin-top: 0;
+
+    .ui-icon {
+      font-size: rem-calc(18px);
+    }
+  }
+
+  &.ui-fileupload--icon-position-right {
+    .ui-fileupload__icon {
+      margin-left: rem-calc(6px);
+      margin-right: 0;
+    }
+  }
+}
+
+.ui-fileupload--size-large {
+  font-size: $ui-button-font-size--large;
+  height: $ui-button-height--large;
+  padding-left: rem-calc(24px);
+  padding-right: rem-calc(24px);
+
+  .ui-fileupload__icon {
+    margin-left: rem-calc(-4px);
+    margin-right: rem-calc(8px);
+  }
+
+  &.ui-fileupload--icon-position-right {
+    .ui-fileupload__icon {
+      margin-left: rem-calc(8px);
+      margin-right: rem-calc(-4px);
+    }
+  }
+}
+
+// ================================================
+// Types and colors
+// ================================================
+
+.ui-fileupload--type-primary {
+  &.ui-fileupload--color-default {
+    background-color: $md-grey-200;
+    color: $primary-text-color;
+
+    &:hover:not(.is-disabled),
+    &.has-focus-ring.is-active,
+    body[modality="keyboard"] &.is-active {
+      background-color: darken($md-grey-200, 7.5%);
+    }
+
+    .ui-ripple-ink__ink {
+      opacity: 0.2;
+    }
+
+    .ui-fileupload__icon {
+      color: $secondary-text-color;
+    }
+  }
+
+  &.ui-fileupload--color-primary,
+  &.ui-fileupload--color-accent {
+    color: white;
+
+    .ui-ripple-ink__ink {
+      opacity: 0.4;
+    }
+  }
+
+  &.ui-fileupload--color-primary {
+    background-color: $brand-primary-color;
+
+    &:hover:not(.is-disabled),
+    &.has-focus-ring.is-active,
+    body[modality="keyboard"] &.is-active {
+      background-color: darken($brand-primary-color, 10%);
+    }
+  }
+
+  &.ui-fileupload--color-accent {
+    background-color: $brand-accent-color;
+
+    &:hover:not(.is-disabled),
+    &.has-focus-ring.is-active,
+    body[modality="keyboard"] &.is-active {
+      background-color: darken($brand-accent-color, 10%);
+    }
+  }
+}
+
+.ui-fileupload--type-secondary {
+  background-color: transparent;
+
+  &:hover:not(.is-disabled),
+  &.has-focus-ring.is-active,
+  body[modality="keyboard"] &.is-active {
+    background-color: darken($md-grey-200, 3%);
+  }
+
+  &.ui-fileupload--color-default {
+    color: $primary-text-color;
+
+    .ui-fileupload__icon {
+      color: $secondary-text-color;
+    }
+  }
+
+  &.ui-fileupload--color-primary {
+    color: $brand-primary-color;
+  }
+
+  &.ui-fileupload--color-accent {
+    color: $brand-accent-color;
+  }
+}
+
+
+/*================================================
+UiIconButton.vue
+================================================*/
+$ui-icon-button-size            : rem-calc(36px) !default;
+$ui-icon-button--size-small     : rem-calc(32px) !default;
+$ui-icon-button--size-large     : rem-calc(48px) !default;
+
+.ui-icon-button {
+  align-items: center;
+  background: none;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  margin: 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+
+  // Fix for border radius not clipping internal content of positioned elements (Chrome/Opera)
+  -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+
+  &,
+  .ui-icon-button__focus-ring {
+    height: $ui-icon-button-size;
+    width: $ui-icon-button-size;
+  }
+
+  body[modality="keyboard"] &:focus {
+    .ui-icon-button__focus-ring {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  // Remove the Firefox dotted outline
+  &::-moz-focus-inner {
+    border: 0;
+  }
+
+  &.is-loading {
+    .ui-icon-button__icon {
+      opacity: 0;
+    }
+  }
+
+  &.is-disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+.ui-icon-button__icon {
+  height: initial;
+  opacity: 1;
+  position: relative;
+  transition-delay: 0.1s;
+  transition: opacity 0.2s ease;
+  width: 100%; // Firefox: needs the width and height reset for flexbox centering
+  z-index: 1;
+}
+
+.ui-icon-button__focus-ring {
+  border-radius: 50%;
+  height: $ui-icon-button-size;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform-origin: center;
+  transform: scale(0);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  width: $ui-icon-button-size;
+}
+
+.ui-progress-circular.ui-icon-button__progress {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ================================================
+// Sizes
+// ================================================
+
+.ui-icon-button--size-small {
+  &,
+  .ui-icon-button__focus-ring {
+    height: $ui-icon-button--size-small;
+    width: $ui-icon-button--size-small;
+  }
+
+  .ui-icon {
+    font-size: rem-calc(18px);
+  }
+}
+
+.ui-icon-button--size-large {
+  &,
+  .ui-icon-button__focus-ring {
+    height: $ui-icon-button--size-large;
+    width: $ui-icon-button--size-large;
+  }
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-icon-button--color-black,
+.ui-icon-button--color-white {
+  background-color: transparent;
+
+  &:hover:not(.is-disabled),
+  &.has-dropdown-open {
+    background-color: rgba(black, 0.1);
+  }
+
+  .ui-icon-button__focus-ring {
+    background-color: rgba(black, 0.15);
+  }
+}
+
+.ui-icon-button--color-black {
+  color: $secondary-text-color;
+
+  .ui-icon-button__icon {
+    color: $secondary-text-color;
+  }
+}
+
+.ui-icon-button--color-white {
+  color: $secondary-text-color;
+
+  .ui-icon-button__icon {
+    color: white;
+  }
+}
+
+// ================================================
+// Types
+// ================================================
+
+.ui-icon-button--type-primary {
+  &.ui-icon-button--color-default {
+    background-color: $md-grey-200;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open {
+      background-color: darken($md-grey-200, 7.5%);
+    }
+
+    .ui-icon-button__focus-ring {
+      background-color: darken($md-grey-200, 15%);
+    }
+
+    .ui-ripple-ink__ink {
+      opacity: 0.2;
+    }
+
+    .ui-icon-button__icon  {
+      color: $primary-text-color;
+    }
+  }
+
+  &.ui-icon-button--color-primary,
+  &.ui-icon-button--color-accent,
+  &.ui-icon-button--color-green,
+  &.ui-icon-button--color-orange,
+  &.ui-icon-button--color-red {
+    color: white;
+
+    .ui-ripple-ink__ink {
+      opacity: 0.4;
+    }
+  }
+
+  &.ui-icon-button--color-primary {
+    background-color: $brand-primary-color;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open {
+      background-color: darken($brand-primary-color, 10%);
+    }
+
+    .ui-icon-button__focus-ring {
+      background-color: darken($brand-primary-color, 15%);
+    }
+  }
+
+  &.ui-icon-button--color-accent {
+    background-color: $brand-accent-color;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open {
+      background-color: darken($brand-accent-color, 10%);
+    }
+
+    .ui-icon-button__focus-ring {
+      background-color: darken($brand-accent-color, 15%);
+    }
+  }
+
+  &.ui-icon-button--color-green {
+    background-color: $md-green;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open {
+      background-color: darken($md-green, 10%);
+    }
+
+    .ui-icon-button__focus-ring {
+      background-color: darken($md-green, 15%);
+    }
+  }
+
+  &.ui-icon-button--color-orange {
+    background-color: $md-orange;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open {
+      background-color: darken($md-orange, 10%);
+    }
+
+    .ui-icon-button__focus-ring {
+      background-color: darken($md-orange, 15%);
+    }
+  }
+
+  &.ui-icon-button--color-red {
+    background-color: $md-red;
+
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open {
+      background-color: darken($md-red, 10%);
+    }
+
+    .ui-icon-button__focus-ring {
+      background-color: darken($md-red, 15%);
+    }
+  }
+}
+
+.ui-icon-button--type-secondary {
+  &.ui-icon-button--color-default {
+    color: $primary-text-color;
+
+    .ui-icon-button__icon {
+      color: $primary-text-color;
+    }
+  }
+
+  &.ui-icon-button--color-default,
+  &.ui-icon-button--color-primary,
+  &.ui-icon-button--color-accent,
+  &.ui-icon-button--color-green,
+  &.ui-icon-button--color-orange,
+  &.ui-icon-button--color-red {
+    &:hover:not(.is-disabled),
+    &.has-dropdown-open {
+      background-color: rgba(black, 0.1);
+    }
+
+    .ui-icon-button__focus-ring {
+      background-color: rgba(black, 0.15);
+    }
+  }
+
+  &.ui-icon-button--color-primary {
+    color: $brand-primary-color;
+
+    .ui-icon-button__icon {
+      color: $brand-primary-color;
+    }
+  }
+
+  &.ui-icon-button--color-accent {
+    color: $brand-accent-color;
+
+    .ui-icon-button__icon {
+      color: $brand-accent-color;
+    }
+  }
+
+  &.ui-icon-button--color-green {
+    color: $md-green-600;
+
+    .ui-icon-button__icon {
+      color: $md-green-600;
+    }
+  }
+
+  &.ui-icon-button--color-orange {
+    color: $md-orange;
+
+    .ui-icon-button__icon {
+      color: $md-orange;
+    }
+  }
+
+  &.ui-icon-button--color-red {
+    color: $md-red;
+
+    .ui-icon-button__icon {
+      color: $md-red;
+    }
+  }
+}
+
+
+/*================================================
+UiIcon.vue
+================================================*/
+$ui-icon-font-size  : rem-calc(24px) !default;
+$ui-icon-size       : 1em !default;
+
+.ui-icon {
+  cursor: inherit;
+  display: inline-block;
+  font-size: $ui-icon-font-size;
+  height: $ui-icon-size;
+  user-select: none;
+  vertical-align: middle;
+  width: $ui-icon-size;
+
+  svg {
+    fill: currentColor;
+    height: $ui-icon-size;
+    margin: 0;
+    padding: 0;
+    width: $ui-icon-size;
+  }
+}
+
+
+/*================================================
+UiMenu.vue
+================================================*/
+.ui-menu {
+  background-color: white;
+  border: rem-calc(1px) solid rgba(black, 0.08);
+  font-family: $font-stack;
+  list-style: none;
+  margin: 0;
+  max-height: 100vh;
+  max-width: rem-calc(272px);
+  min-width: rem-calc(168px);
+  outline: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: rem-calc(4px 0);
+
+  &.is-raised {
+    border: none;
+    box-shadow: 0 2px 4px -1px rgba(black, 0.2),
+    0 4px 5px 0 rgba(black, 0.14),
+    0 1px 10px 0 rgba(black, 0.12);
+  }
+
+  &.has-secondary-text {
+    min-width: rem-calc(240px);
+    max-width: rem-calc(304px);
+  }
+}
+
+.ui-menu__focus-redirector {
+  position: absolute;
+  opacity: 0;
+}
+
+
+/*================================================
+UiMenuOption.vue
+================================================*/
+.ui-menu-option {
+  display: block;
+  font-family: $font-stack;
+  position: relative;
+  user-select: none;
+  width: 100%;
+
+  &.is-divider {
+    background-color: rgba(black, 0.08);
+    display: block;
+    height: rem-calc(1px);
+    margin: rem-calc(6px 0);
+    padding: 0;
+  }
+
+  &:not(.is-divider) {
+    color: $primary-text-color;
+    cursor: pointer;
+    font-size: $ui-dropdown-item-font-size;
+    font-weight: normal;
+    min-height: rem-calc(40px);
+    outline: none;
+
+    &:hover:not(.is-disabled),
+    body[modality="keyboard"] &:focus {
+      background-color: #EEEEEE; // rgba(black, 0.1);
+    }
+
+    &.is-disabled {
+      color: $secondary-text-color;
+      cursor: default;
+      opacity: 0.5;
+
+      .ui-menu-option__secondary-text {
+        color: $secondary-text-color;
+      }
+    }
+  }
+}
+
+.ui-menu-option__content {
+  align-items: center;
+  display: flex;
+  height: rem-calc(40px);
+  padding: rem-calc(0 16px);
+}
+
+.ui-menu-option__icon {
+  color: $secondary-text-color;
+  font-size: rem-calc(18px);
+  margin-right: rem-calc(16px);
+}
+
+.ui-menu-option__text {
+  @include text-truncation;
+  flex-grow: 1;
+}
+
+.ui-menu-option__secondary-text {
+  color: $hint-text-color;
+  flex-shrink: 0;
+  font-size: rem-calc(13px);
+  margin-left: rem-calc(4px);
+}
+
+
+/*================================================
+UiModal.vue
+================================================*/
+$ui-modal-transition-duration   : 0.3s !default;
+$ui-modal-mask-background       : rgba(black, 0.5) !default;
+$ui-modal-header-height         : rem-calc(56px);
+$ui-modal-footer-height         : rem-calc(70px);
+
+$ui-modal-font-size             : rem-calc(14px);
+$ui-modal-header-font-size      : rem-calc(18px);
+
+.ui-modal {
+  font-family: $font-stack;
+  font-size: $ui-modal-font-size;
+
+  &.has-footer {
+    .ui-modal__body {
+      max-height: calc(100vh - #{$ui-modal-header-height + $ui-modal-footer-height});
+    }
+  }
+
+  &:not(.has-footer) {
+    .ui-modal__body {
+      padding: rem-calc(16px 24px 24px);
+    }
+  }
+}
+
+.ui-modal--is-open {
+  overflow: hidden;
+}
+
+.ui-modal__mask {
+  background-color: $ui-modal-mask-background;
+  display: table;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity $ui-modal-transition-duration ease;
+  width: 100%;
+  z-index: $z-index-modal;
+}
+
+.ui-modal__wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  overflow-x: hidden;
+
+  &.has-dummy-scrollbar {
+    overflow-y: scroll;
+  }
+}
+
+.ui-modal__container {
+  background-color: white;
+  border-radius: $ui-default-border-radius;
+  box-shadow: 0 2px 8px rgba(black, 0.33);
+  margin: 0 auto;
+  max-height: 100vh;
+  max-width: 100vw;
+  outline: none;
+  overflow: hidden;
+  padding: 0;
+  transition: all $ui-modal-transition-duration ease;
+  width: rem-calc(528px);
+}
+
+.ui-modal__header {
+  align-items: center;
+  background-color: #F5F5F5;
+  box-shadow: 0 1px 1px rgba(black, 0.16);
+  display: flex;
+  height: $ui-modal-header-height;
+  padding: rem-calc(0 24px);
+  position: relative;
+  z-index: 1;
+}
+
+.ui-modal__header-text {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  font-size: $ui-modal-header-font-size;
+  font-weight: normal;
+  margin: 0;
+}
+
+.ui-modal__close-button {
+  margin-left: auto;
+  margin-right: rem-calc(-8px);
+}
+
+.ui-modal__body {
+  max-height: calc(100vh - #{$ui-modal-header-height});
+  overflow-y: auto;
+  padding: rem-calc(16px 24px);
+}
+
+.ui-modal__footer {
+  align-items: center;
+  display: flex;
+  height: $ui-modal-footer-height;
+  justify-content: flex-end;
+  padding: rem-calc(0 24px);
+
+  .ui-button {
+    margin-left: rem-calc(8px);
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+// ================================================
+// Sizes
+// ================================================
+
+.ui-modal--size-large {
+  .ui-modal__container {
+    width: rem-calc(848px);
+  }
+}
+
+.ui-modal--size-small {
+  .ui-modal__container {
+    width: rem-calc(320px);
+  }
+}
+
+// ================================================
+// Transitions
+// ================================================
+
+.ui-modal--transition-fade-enter,
+.ui-modal--transition-fade-leave-active {
+  opacity: 0;
+}
+
+.ui-modal--transition-scale-enter,
+.ui-modal--transition-scale-leave-active {
+  opacity: 0;
+
+  .ui-modal__container {
+    transform: scale(1.1);
+  }
+}
+
+
+/*================================================
+UiPopover.vue
+================================================*/
+.ui-popover {
+  background-color: white;
+  outline: none;
+
+  &.is-raised {
+    box-shadow: 0 2px 4px -1px rgba(black, 0.2),
+    0 4px 5px 0 rgba(black, 0.14),
+    0 1px 10px 0 rgba(black, 0.12);
+  }
+
+  .ui-menu {
+    border: none;
+  }
+}
+
+.ui-popover__focus-redirector {
+  opacity: 0;
+  position: absolute;
+}
+
+.drop-element {
+  display: none;
+  max-height: 100%;
+  max-width: 100%;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.2s ease;
+  z-index: $z-index-dropdown;
+
+  &,
+  &:after,
+  &:before,
+  & *,
+  & *:after,
+  & *:before {
+    box-sizing: border-box;
+  }
+
+  &.drop-open {
+    display: block;
+  }
+
+  &.drop-after-open {
+    opacity: 1;
+  }
+}
+
+
+/*================================================
+UiPreloader.vue
+================================================*/
+$ui-preloader-duration  : 3s !default;
+$ui-preloader-height    : rem-calc(3px) !default;
+
+$ui-preloader-color-1   : #159756 !default; // green
+$ui-preloader-color-2   : #da4733 !default; // red
+$ui-preloader-color-3   : #3b78e7 !default; // blue
+$ui-preloader-color-4   : #fdba2c !default; // orange
+
+.ui-preloader {
+  position: relative;
+  width: 100%;
+
+  &.is-loading {
+    .ui-preloader__progressbar {
+      opacity: 1;
+      padding-top: $ui-preloader-height;
+    }
+  }
+}
+
+.ui-preloader__progressbar {
+  animation: ui-preloader-background linear $ui-preloader-duration infinite;
+  background-color: $ui-preloader-color-1;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition-duration: 0.3s;
+  transition-property: opacity, padding-top;
+  transition-timing-function: ease;
+  width: 100%;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    animation: ui-preloader-front linear $ui-preloader-duration infinite;
+    content: '';
+    display: block;
+    height: $ui-preloader-height;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &::before {
+    right: 50%;
+    transform-origin: right;
+  }
+
+  &::after {
+    left: 50%;
+    transform-origin: left;
+  }
+}
+
+@keyframes ui-preloader-background {
+  0%,
+  24.9% {
+    background-color: $ui-preloader-color-1;
+  }
+
+  25%,
+  49.9% {
+    background-color: $ui-preloader-color-2;
+  }
+
+  50%,
+  74.9% {
+    background-color: $ui-preloader-color-3;
+  }
+
+  75%,
+  100% {
+    background-color: $ui-preloader-color-4;
+  }
+}
+
+@keyframes ui-preloader-front {
+  0% {
+    transform: scaleX(0);
+    background-color: $ui-preloader-color-2;
+  }
+
+  24.9% {
+    transform: scaleX(0.5);
+    background-color: $ui-preloader-color-2;
+  }
+
+  25% {
+    transform: scaleX(0);
+    background-color: $ui-preloader-color-3;
+  }
+
+  49.9% {
+    transform: scaleX(0.5);
+    background-color: $ui-preloader-color-3;
+  }
+
+  50% {
+    transform: scaleX(0);
+    background-color: $ui-preloader-color-4;
+  }
+
+  74.9% {
+    transform: scaleX(0.5);
+    background-color: $ui-preloader-color-4;
+  }
+
+  75% {
+    transform: scaleX(0);
+    background-color: $ui-preloader-color-1;
+  }
+
+  100% {
+    transform: scaleX(0.5);
+    background-color: $ui-preloader-color-1;
+  }
+}
+
+
+/*================================================
+UiProgressLinear.vue
+================================================*/
+$ui-progress-linear-height : rem-calc(4px) !default;
+
+.ui-progress-linear {
+  display: block;
+  height: $ui-progress-linear-height;
+  overflow: hidden;
+  position: relative;
+  transition-duration: 0.3s;
+  transition-property: height, opacity;
+  transition-timing-function: ease;
+  width: 100%;
+}
+
+.ui-progress-linear__progress-bar {
+  &.is-determinate {
+    height: $ui-progress-linear-height;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform-origin: left;
+    transition: transform 0.2s linear;
+    width: 100%;
+  }
+
+  &.is-indeterminate {
+    &::before {
+      animation: ui-progress-linear-indeterminate 2.1s cubic-bezier(0.650, 0.815, 0.735, 0.395) infinite;
+      background-color: inherit;
+      content: '';
+      height: $ui-progress-linear-height;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    &::after {
+      animation-delay: 1.15s;
+      animation: ui-progress-linear-indeterminate-short 2.1s cubic-bezier(0.165, 0.840, 0.440, 1.000) infinite;
+      background-color: inherit;
+      content: '';
+      height: $ui-progress-linear-height;
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+  }
+}
+
+// ================================================
+// Animations
+// ================================================
+
+@keyframes ui-progress-linear-indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@keyframes ui-progress-linear-indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+
+// ================================================
+// Toggle transition
+// ================================================
+
+.ui-progress-linear--transition-fade-enter-active,
+.ui-progress-linear--transition-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.ui-progress-linear--transition-fade-enter,
+.ui-progress-linear--transition-fade-leave-active {
+  opacity: 0;
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-progress-linear--color-primary {
+  background-color: rgba($brand-primary-color, 0.4);
+
+  .ui-progress-linear__progress-bar {
+    background-color: $brand-primary-color;
+  }
+}
+
+.ui-progress-linear--color-accent {
+  background-color: rgba($brand-accent-color, 0.4);
+
+  .ui-progress-linear__progress-bar {
+    background-color: $brand-accent-color;
+  }
+}
+
+.ui-progress-linear--color-black {
+  background-color: rgba($md-grey-700, 0.4);
+
+  .ui-progress-linear__progress-bar {
+    background-color: $md-grey-700;
+  }
+}
+
+.ui-progress-linear--color-white {
+  background-color: rgba(white, 0.4);
+
+  .ui-progress-linear__progress-bar {
+    background-color: white;
+  }
+}
+
+
+/*================================================
+UiProgressCircular.vue
+================================================*/
+$ui-progress-indeterminate-rotation-duration    : 0.7s !default;
+$ui-progress-indeterminate-color-duration       : 6s !default;
+$ui-progress-determinate-transition-duration    : 0.3s !default;
+
+.ui-progress-circular {
+  position: relative;
+}
+
+.ui-progress-circular__determinate {
+  transform: rotate(270deg);
+}
+
+.ui-progress-circular__determinate-path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset $ui-progress-determinate-transition-duration;
+}
+
+.ui-progress-circular__indeterminate {
+  animation: ui-progress-circular-rotate $ui-progress-indeterminate-rotation-duration linear infinite;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform-origin: center center;
+  width: 100%;
+}
+
+.ui-progress-circular__indeterminate-path {
+  stroke-dasharray: 89,200;
+  stroke-dashoffset: -35px;
+  stroke-linecap: round;
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-progress-circular--color-multi-color {
+  .ui-progress-circular__determinate-path {
+    stroke: $brand-primary-color;
+  }
+
+  .ui-progress-circular__indeterminate-path {
+    animation: ui-progress-circular-color $ui-progress-indeterminate-color-duration ease-in-out infinite;
+  }
+}
+
+.ui-progress-circular--color-primary {
+  .ui-progress-circular__determinate-path,
+  .ui-progress-circular__indeterminate-path {
+    stroke: $brand-primary-color;
+  }
+}
+
+.ui-progress-circular--color-accent {
+  .ui-progress-circular__determinate-path,
+  .ui-progress-circular__indeterminate-path {
+    stroke: $brand-accent-color;
+  }
+}
+
+.ui-progress-circular--color-black {
+  .ui-progress-circular__determinate-path,
+  .ui-progress-circular__indeterminate-path {
+    stroke: $md-grey-900;
+  }
+}
+
+.ui-progress-circular--color-white {
+  .ui-progress-circular__determinate-path,
+  .ui-progress-circular__indeterminate-path {
+    stroke: white;
+  }
+}
+
+// ================================================
+// Toggle transition
+// ================================================
+
+.ui-progress-circular--transition-fade-enter-active,
+.ui-progress-circular--transition-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.ui-progress-circular--transition-fade-enter,
+.ui-progress-circular--transition-fade-leave-active {
+  opacity: 0;
+  transform: scale(0);
+}
+
+// ================================================
+// Animations
+// ================================================
+
+@keyframes ui-progress-circular-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ui-progress-circular-color {
+  0%,
+  100% {
+    stroke: $md-red;
+  }
+
+  40% {
+    stroke: $md-blue;
+  }
+
+  66% {
+    stroke: $md-green;
+  }
+
+  80%,
+  90% {
+    stroke: $md-orange;
+  }
+}
+
+
+/*================================================
+UiRadio.vue
+================================================*/
+$ui-radio-size                  : rem-calc(20px) !default;
+$ui-radio-stroke                : rem-calc(2px) !default;
+$ui-radio-focus-ring-size       : $ui-radio-size * 2.1 !default;
+$ui-radio-transition-duration   : 0.3s !default;
+$ui-radio-label-font-size       : rem-calc(16px) !default;
+
+.ui-radio {
+  align-items: center;
+  display: flex;
+  font-family: $font-stack;
+  font-size: $ui-input-label-font-size;
+  height: $ui-radio-size;
+  margin: 0;
+
+  &:hover:not(.is-disabled):not(.is-checked) {
+    .ui-radio__outer-circle {
+      border: $ui-radio-stroke solid $secondary-text-color;
+    }
+  }
+
+  &.is-checked {
+    .ui-radio__inner-circle {
+      opacity: 1;
+      transform: scale(0.5);
+      z-index: 0;
+    }
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+
+    .ui-radio__input-wrapper,
+    .ui-radio__label-text {
+      cursor: default;
+    }
+  }
+}
+
+.ui-radio__input-wrapper {
+  cursor: pointer;
+  height: $ui-radio-size;
+  position: relative;
+  width: $ui-radio-size;
+}
+
+.ui-radio__input {
+  appearance: none;
+  height: 1px;
+  left: 0;
+  margin: 0;
+  opacity: 0;
+  outline: none;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+
+  body[modality="keyboard"] &:focus + .ui-radio__focus-ring {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.ui-radio__outer-circle {
+  background-color: transparent;
+  border-radius: 50%;
+  border: $ui-radio-stroke solid $hint-text-color;
+  height: $ui-radio-size;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: border-color 0.2s;
+  width: $ui-radio-size;
+}
+
+.ui-radio__inner-circle {
+  background-color: $hint-text-color;
+  border-radius: 50%;
+  height: $ui-radio-size;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transform: scale(1.2);
+  transition-duration: $ui-radio-transition-duration;
+  transition-property: transform, opacity, background-color;
+  width: $ui-radio-size;
+  z-index: -1;
+}
+
+.ui-radio__focus-ring {
+  background-color: rgba(black, 0.1);
+  border-radius: 50%;
+  height: $ui-radio-focus-ring-size;
+  left: -(($ui-radio-focus-ring-size - $ui-radio-size) / 2);
+  opacity: 0;
+  position: absolute;
+  top: -(($ui-radio-focus-ring-size - $ui-radio-size) / 2);
+  transform: scale(0);
+  transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.15s ease;
+  width: $ui-radio-focus-ring-size;
+  z-index: -1;
+}
+
+.ui-radio__label-text {
+  cursor: pointer;
+  font-size: $ui-radio-label-font-size;
+  margin-left: rem-calc(8px);
+}
+
+// ================================================
+// Button Positions
+// ================================================
+
+.ui-radio--button-position-right {
+  .ui-radio__label-text {
+    margin-left: 0;
+    margin-right: auto;
+    order: -1;
+  }
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-radio--color-primary {
+  &.is-checked:not(.is-disabled) {
+    .ui-radio__outer-circle {
+      border-color: $brand-primary-color;
+    }
+
+    .ui-radio__inner-circle {
+      background-color: $brand-primary-color;
+    }
+
+    .ui-radio__focus-ring {
+      background-color: rgba($brand-primary-color, 0.2);
+    }
+  }
+}
+
+.ui-radio--color-accent {
+  &.is-checked:not(.is-disabled) {
+    .ui-radio__outer-circle {
+      border-color: $brand-accent-color;
+    }
+
+    .ui-radio__inner-circle {
+      background-color: $brand-accent-color;
+    }
+
+    .ui-radio__focus-ring {
+      background-color: rgba($brand-accent-color, 0.2);
+    }
+  }
+}
+
+
+/*================================================
+UiRadioGroup.vue
+================================================*/
+.ui-radio-group {
+  font-family: $font-stack;
+
+  &:not(.is-disabled):not(.is-invalid):hover {
+    .ui-radio-group__label-text {
+      color: $ui-input-label-color--hover;
+    }
+  }
+
+  &:not(.is-disabled):not(.is-invalid).is-active {
+    .ui-radio-group__label-text {
+      color: $ui-input-label-color--active;
+    }
+  }
+
+  &.is-vertical {
+    .ui-radio-group__radios {
+      flex-direction: column;
+      padding-top: rem-calc(8px);
+    }
+
+    .ui-radio-group__radio {
+      margin-bottom: rem-calc(12px);
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+  &.is-invalid {
+    .ui-radio-group__label-text {
+      color: $ui-input-border-color--invalid;
+    }
+
+    .ui-radio-group__feedback {
+      color: $ui-input-feedback-color--invalid;
+    }
+  }
+
+  &.is-disabled {
+    .ui-radio-group__feedback {
+      opacity: $ui-input-feedback-opacity--disabled;
+    }
+  }
+}
+
+.ui-radio-group__label-text {
+  color: $ui-input-label-color;
+  font-size: $ui-input-label-font-size;
+  line-height: $ui-input-label-line-height;
+  transition: color 0.1s ease;
+}
+
+.ui-radio-group__radios {
+  align-items: center;
+  display: flex;
+  min-height: $ui-input-height;
+}
+
+.ui-radio.ui-radio-group__radio {
+  margin-left: rem-calc(24px);
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.ui-radio-group__feedback {
+  color: $ui-input-feedback-color;
+  font-size: $ui-input-feedback-font-size;
+  line-height: $ui-input-feedback-line-height;
+  margin: 0;
+  padding-top: $ui-input-feedback-padding-top - rem-calc(4px);
+  position: relative;
+}
+
+// ================================================
+// Button Positions
+// ================================================
+
+.ui-radio-group--button-position-right {
+  &:not(.is-vertical) {
+    .ui-radio__label-text {
+      margin-right: rem-calc(8px);
+    }
+  }
+}
+
+
+/*================================================
+UiRippleInk.vue
+================================================*/
+.ui-ripple-ink {
+  border-radius: inherit;
+  bottom: 0;
+  display: block;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  // Forces webkit to properly contain content within border-radius
+  -webkit-mask-image: -webkit-radial-gradient(circle, white, black);
+}
+
+.ui-ripple-ink__ink {
+  background-clip: padding-box;
+  background-color: currentColor;
+  border-radius: 50%;
+  height: 0;
+  opacity: 0.2;
+  pointer-events: none;
+  position: absolute;
+  transform: scale(0);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+  user-select: none;
+  width: 0;
+
+  &.is-held {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  &.is-done {
+    opacity: 0!important;
+  }
+}
+
+
+/*================================================
+UiSelectOption.vue
+================================================*/
+$ui-select-option-checkbox-color: rgba(black, 0.38) !default;
+
+.ui-select-option {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-family: $font-stack;
+  font-size: $ui-dropdown-item-font-size;
+  user-select: none;
+
+  &.is-selected {
+    background-color: rgba(black, 0.05);
+    color: $brand-primary-color;
+    font-weight: 500;
+
+    .ui-select-option__checkbox {
+      color: $brand-primary-color;
+    }
+  }
+
+  &.is-highlighted {
+    background-color: rgba(black, 0.1);
+  }
+}
+
+.ui-select-option__basic,
+.ui-select-option__image-text {
+  @include text-truncation;
+}
+
+.ui-select-option__image {
+  display: flex;
+  align-items: center;
+}
+
+.ui-select-option__image-object {
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 50%;
+  height: rem-calc(32px);
+  margin-right: rem-calc(12px);
+  width: rem-calc(32px);
+}
+
+.ui-select-option__checkbox {
+  color: $ui-select-option-checkbox-color;
+  margin-left: auto;
+}
+
+// ================================================
+// Types
+// ================================================
+
+.ui-select-option--type-basic {
+  padding: rem-calc(6px 12px);
+}
+
+.ui-select-option--type-image {
+  padding: rem-calc(4px 12px);
+}
+
+
+/*================================================
+UiSelect.vue
+================================================*/
+.ui-select {
+  align-items: flex-start;
+  display: flex;
+  font-family: $font-stack;
+  margin-bottom: $ui-input-margin-bottom;
+  outline: none;
+  position: relative;
+
+  &:hover:not(.is-disabled) {
+    .ui-select__label-text {
+      color: $ui-input-label-color--hover;
+    }
+
+    .ui-select__display {
+      border-bottom-color: $ui-input-border-color--hover;
+    }
+
+    .ui-select__dropdown-button {
+      color: $ui-input-button-color--hover;
+    }
+  }
+
+  &.is-active:not(.is-disabled) {
+    .ui-select__label-text,
+    .ui-select__icon-wrapper .ui-icon {
+      color: $ui-input-label-color--active;
+    }
+
+    .ui-select__display {
+      border-bottom-color: $ui-input-border-color--active;
+      border-bottom-width: $ui-input-border-width--active;
+    }
+  }
+
+  &.has-floating-label {
+    .ui-select__label-text {
+      // Behaves like a block, but width is the width of its content.
+      // Needed here so label doesn't overflow parent when scaled.
+      display: table;
+
+      &.is-inline {
+        color: $ui-input-label-color; // So the hover styles don't override it
+        cursor: pointer;
+        transform: translateY($ui-input-label-top--inline) scale(1.1);
+      }
+
+      &.is-floating {
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  &.has-label {
+    .ui-select__icon-wrapper {
+      padding-top: $ui-input-icon-margin-top--with-label;
+    }
+
+    .ui-select__dropdown-button {
+      top: $ui-input-button-margin-top--with-label;
+    }
+  }
+
+  &:not(.is-multiple) {
+    .ui-select__display {
+      height: $ui-input-height;
+      line-height: 1;
+    }
+  }
+
+  &.is-multiple {
+    .ui-select__display {
+      line-height: 1.4;
+      padding-bottom: rem-calc(4px);
+      padding-top: rem-calc(4px);
+    }
+  }
+
+  &.is-invalid:not(.is-disabled) {
+    .ui-select__label-text,
+    .ui-select__icon-wrapper .ui-icon {
+      color: $ui-input-label-color--invalid;
+    }
+
+    .ui-select__display {
+      border-bottom-color: $ui-input-border-color--invalid;
+    }
+
+    .ui-select__feedback {
+      color: $ui-input-feedback-color--invalid;
+    }
+  }
+
+  &.is-disabled {
+    .ui-select__display {
+      border-bottom-style: $ui-input-border-style--disabled;
+      border-bottom-width: $ui-input-border-width--active;
+      color: $ui-input-text-color--disabled;
+      cursor: default;
+    }
+
+    .ui-select__dropdown-button,
+    .ui-select__display-value.is-placeholder {
+      color: $ui-input-text-color--disabled;
+      opacity: $ui-input-button-opacity--disabled;
+    }
+
+    .ui-select__icon-wrapper .ui-icon {
+      opacity: $ui-input-icon-opacity--disabled;
+    }
+
+    .ui-select__feedback {
+      opacity: $ui-input-feedback-opacity--disabled;
+    }
+  }
+}
+
+.ui-select__label {
+  display: block;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.ui-select__icon-wrapper {
+  flex-shrink: 0;
+  margin-right: $ui-input-icon-margin-right;
+  padding-top: $ui-input-icon-margin-top;
+
+  .ui-icon {
+    color: $ui-input-icon-color;
+  }
+}
+
+.ui-select__content {
+  flex-grow: 1;
+}
+
+.ui-select__label-text {
+  color: $ui-input-label-color;
+  font-size: $ui-input-label-font-size;
+  line-height: $ui-input-label-line-height;
+  margin-bottom: $ui-input-label-margin-bottom;
+  transform-origin: left;
+  transition: color 0.1s ease, transform 0.2s ease;
+}
+
+.ui-select__display {
+  align-items: center;
+  border: none;
+  border-bottom-color: $ui-input-border-color;
+  border-bottom-style: solid;
+  border-bottom-width: $ui-input-border-width;
+  color: $ui-input-text-color;
+  cursor: pointer;
+  display: flex;
+  font-family: $font-stack;
+  font-size: $ui-input-text-font-size;
+  font-weight: normal;
+  padding: 0;
+  transition: border 0.1s ease;
+  user-select: none;
+  width: 100%;
+}
+
+.ui-select__display-value {
+  flex-grow: 1;
+
+  &.is-placeholder {
+    color: $hint-text-color;
+  }
+}
+
+.ui-select__dropdown-button {
+  color: $ui-input-button-color;
+  font-size: $ui-input-button-size;
+  margin-left: auto;
+  margin-right: rem-calc(-4px);
+}
+
+.ui-select__dropdown {
+  background-color: white;
+  box-shadow: 1px 2px 8px $md-grey-600;
+  color: $primary-text-color;
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  margin-bottom: rem-calc(8px);
+  min-width: rem-calc(180px);
+  outline: none;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: $z-index-dropdown;
+}
+
+.ui-select__search-input {
+  background: none;
+  border: none;
+  border-bottom-color: $ui-input-border-color;
+  border-bottom-style: solid;
+  border-bottom-width: $ui-input-border-width;
+  border-radius: 0;
+  color: $ui-input-text-color;
+  cursor: auto;
+  font-family: $font-stack;
+  font-size: $ui-input-text-font-size - rem-calc(1px);
+  font-weight: normal;
+  height: $ui-input-height + rem-calc(4px);
+  outline: none;
+  padding: rem-calc(0 12px);
+  padding-left: rem-calc(40px);
+  transition: border 0.1s ease;
+  width: 100%;
+
+  // Hide Edge and IE input clear button
+  &::-ms-clear {
+    display: none;
+  }
+
+  &:focus + .ui-select__search-icon {
+    color: $ui-input-label-color--active;
+  }
+}
+
+.ui-select__search-icon,
+.ui-select__search-progress {
+  position: absolute;
+  top: rem-calc(8px);
+}
+
+.ui-select__search-icon {
+  color: $ui-input-icon-color;
+  font-size: rem-calc(20px);
+  left: rem-calc(12px);
+}
+
+.ui-select__search-progress {
+  right: rem-calc(12px);
+}
+
+.ui-select__options {
+  background-color: white;
+  color: $primary-text-color;
+  display: block;
+  list-style-type: none;
+  margin: 0;
+  max-height: rem-calc(256px);
+  min-width: 100%;
+  overflow-y: auto;
+  padding: 0;
+  position: relative;
+}
+
+.ui-select__no-results {
+  color: $secondary-text-color;
+  font-size: rem-calc(14px);
+  padding: rem-calc(8px 12px);
+  width: 100%;
+}
+
+.ui-select__feedback {
+  color: $ui-input-feedback-color;
+  font-size: $ui-input-feedback-font-size;
+  line-height: $ui-input-feedback-line-height;
+  margin: 0;
+  padding-top: $ui-input-feedback-padding-top;
+  position: relative;
+}
+
+// ================================================
+// Icon Positions
+// ================================================
+
+.ui-select--icon-position-right {
+  .ui-select__icon-wrapper {
+    margin-left: rem-calc(8px);
+    margin-right: 0;
+    order: 1;
+  }
+}
+
+// ================================================
+// Transitions
+// ================================================
+
+.ui-select--transition-fade-enter-active,
+.ui-select--transition-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.ui-select--transition-fade-enter,
+.ui-select--transition-fade-leave-active {
+  opacity: 0;
+}
+
+
+/*================================================
+UiSlider.vue
+================================================*/
+$ui-slider-height                   : rem-calc(18px) !default;
+
+// Track line
+$ui-slider-track-height             : rem-calc(3px) !default;
+$ui-slider-track-fill-color         : $brand-primary-color !default;
+$ui-slider-track-background-color   : rgba(black, 0.12) !default;
+
+// Drag thumb
+$ui-track-thumb-size                : rem-calc(14px) !default;
+$ui-track-thumb-fill-color          : $brand-primary-color !default;
+
+// Focus ring
+$ui-track-focus-ring-size                   : rem-calc(36px) !default;
+$ui-track-focus-ring-transition-duration    : 0.2s !default;
+$ui-track-focus-ring-color                  : rgba($ui-track-thumb-fill-color, 0.38) !default;
+
+// Marker
+$ui-slider-marker-size                      : rem-calc(36px);
+
+.ui-slider {
+  align-items: center;
+  display: flex;
+  outline: none;
+
+  &:not(.is-disabled).is-active,
+  &:not(.is-disabled).is-dragging {
+    &:not(.has-marker) {
+      .ui-slider__thumb::before {
+        transform: scale(1);
+      }
+    }
+
+    .ui-slider__marker {
+      opacity: 1;
+      transform: scale(1) translateY(rem-calc(-26px));
+    }
+
+    .ui-slider__marker-text {
+      color: white;
+    }
+
+    .ui-slider__snap-point {
+      opacity: 1;
+    }
+
+    .ui-slider__icon .ui-icon {
+      color: $ui-track-thumb-fill-color;
+    }
+  }
+
+  &.is-disabled {
+    .ui-slider__icon {
+      opacity: 0.6;
+    }
+
+    .ui-slider__track {
+      cursor: default;
+    }
+
+    .ui-slider__track-fill {
+      background-color: transparent;
+    }
+
+    .ui-slider__thumb {
+      background-color: #DDD;
+      border: rem-calc(2px) solid white;
+    }
+  }
+}
+
+.ui-slider__icon {
+  margin-right: rem-calc(16px);
+
+  .ui-icon {
+    color: $secondary-text-color;
+    transition: color $ui-track-focus-ring-transition-duration ease;
+  }
+}
+
+.ui-slider__track {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  height: $ui-slider-height;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+}
+
+.ui-slider__track-background,
+.ui-slider__track-fill {
+  content: '';
+  display: block;
+  height: $ui-slider-track-height;
+  left: 0;
+  position: absolute;
+  top: ($ui-slider-height - $ui-slider-track-height) / 2;
+}
+
+.ui-slider__track-background {
+  background-color: $ui-slider-track-background-color;
+  width: 100%;
+}
+
+.ui-slider__snap-point {
+  background-color: rgba(black, 0.75);
+  height: $ui-slider-track-height;
+  opacity: 0;
+  position: absolute;
+  transform: opacity 0.2s ease;
+  width: rem-calc(2px);
+  z-index: 1;
+}
+
+.ui-slider__track-fill {
+  background-color: $ui-slider-track-fill-color;
+  transform-origin: left;
+  width: 100%;
+}
+
+.ui-slider__thumb {
+  background-color: $ui-track-thumb-fill-color;
+  border-radius: 50%;
+  cursor: inherit;
+  display: block;
+  height: $ui-track-thumb-size;
+  left: 0;
+  position: relative;
+  width: $ui-track-thumb-size;
+  z-index: 1;
+
+  // Focus ring
+  &::before {
+    background-color: $ui-track-focus-ring-color;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: $ui-track-focus-ring-size;
+    margin-left: -($ui-track-focus-ring-size - $ui-track-thumb-size) / 2;
+    margin-top: -($ui-track-focus-ring-size - $ui-track-thumb-size) / 2;
+    position: absolute;
+    transform-origin: center;
+    transform: scale(0);
+    transition: transform $ui-track-focus-ring-transition-duration ease;
+    width: $ui-track-focus-ring-size;
+  }
+}
+
+.ui-slider__marker {
+  height: $ui-slider-marker-size;
+  margin-left: -($ui-slider-marker-size - $ui-track-thumb-size) / 2;
+  margin-top: -($ui-slider-marker-size - $ui-track-thumb-size) / 2;
+  opacity: 0;
+  position: absolute;
+  transform: scale(0) translateY(0) ;
+  transition: all $ui-track-focus-ring-transition-duration ease;
+  user-select: none;
+  width: $ui-slider-marker-size;
+
+  svg {
+    fill: $ui-track-thumb-fill-color;
+    height: $ui-slider-marker-size;
+    width: $ui-slider-marker-size;
+  }
+}
+
+.ui-slider__marker-text {
+  color: $ui-track-thumb-fill-color;;
+  font-size: rem-calc(13px);
+  font-weight: 500;
+  left: 0;
+  position: absolute;
+  text-align: center;
+  top: rem-calc(4px);
+  transition: color $ui-track-focus-ring-transition-duration ease;
+  width: $ui-slider-marker-size;
+}
+
+// Applied globally to the body tag when dragging
+.ui-slider--is-dragging {
+  user-select: none;
+}
+
+
+/*================================================
+UiSnackbar.vue
+================================================*/
+$ui-snackbar-background-color   : #323232 !default;
+$ui-snackbar-font-size          : rem-calc(14px) !default;
+
+.ui-snackbar {
+  align-items: center;
+  background-color: $ui-snackbar-background-color;
+  border-radius: $ui-default-border-radius;
+  box-shadow: 0 1px 3px rgba(black, 0.12), 0 1px 2px rgba(black, 0.24);
+  display: inline-flex;
+  font-family: $font-stack;
+  max-width: rem-calc(568px);
+  min-height: rem-calc(48px);
+  min-width: rem-calc(288px);
+  padding: rem-calc(14px 24px);
+}
+
+.ui-snackbar__message {
+  color: white;
+  cursor: default;
+  font-size: $ui-snackbar-font-size;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.ui-snackbar__action {
+  margin-left: auto;
+  margin: rem-calc(-9px -12px);
+  padding-left: rem-calc(48px);
+}
+
+.ui-snackbar__action-button {
+  margin: 0;
+  min-height: initial;
+  min-width: initial;
+  padding: rem-calc(12px);
+
+  &:hover:not(.is-disabled) {
+    background-color: rgba(white, 0.05);
+  }
+
+  body[modality="keyboard"] &:focus {
+    background-color: rgba(white, 0.1);
+  }
+}
+
+.ui-snackbar--transition-slide-enter-active,
+.ui-snackbar--transition-slide-leave-active {
+  transition: transform 0.4s ease;
+}
+
+.ui-snackbar--transition-slide-enter,
+.ui-snackbar--transition-slide-leave-active {
+  transform: translateY(rem-calc(84px));
+}
+
+.ui-snackbar--transition-fade-enter-active,
+.ui-snackbar--transition-fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+
+.ui-snackbar--transition-fade-enter,
+.ui-snackbar--transition-fade-leave-active {
+  opacity: 0;
+}
+
+
+/*================================================
+UiSnackbarContainer.vue
+================================================*/
+.ui-snackbar-container {
+  bottom: 0;
+  left: rem-calc(8px);
+  overflow: hidden;
+  position: absolute;
+
+  .ui-snackbar {
+    margin: rem-calc(4px 4px 12px 4px);
+  }
+}
+
+.ui-snackbar-container--position-right {
+  left: initial;
+  right: rem-calc(8px);
+}
+
+.ui-snackbar-container--position-center {
+  display: flex;
+  justify-content: center;
+  left: rem-calc(8px);
+  right: rem-calc(8px);
+}
+
+
+/*================================================
+UiSwitch.vue
+================================================*/
+$ui-switch-height           : rem-calc(32px) !default;
+
+$ui-switch-thumb-size       : rem-calc(20px) !default;
+$ui-switch-thumb-color      : $md-grey-50 !default;
+
+$ui-switch-track-width      : rem-calc(34px) !default;
+$ui-switch-track-height     : rem-calc(14px) !default;
+
+$ui-switch-focus-ring-size  : $ui-switch-thumb-size * 2.1 !default;
+
+.ui-switch {
+  align-items: center;
+  display: flex;
+  font-family: $font-stack;
+  height: $ui-switch-height;
+  position: relative;
+
+  &.is-checked {
+    .ui-switch__thumb {
+      transform: translateX($ui-switch-track-width - $ui-switch-thumb-size);
+    }
+  }
+
+  &.is-disabled {
+    .ui-switch__track {
+      background-color: rgba(black, 0.12);
+    }
+
+    .ui-switch__thumb {
+      background-color: $md-grey-400;
+      box-shadow: none;
+    }
+
+    .ui-switch__input-wrapper,
+    .ui-switch__label-text {
+      color: $disabled-text-color;
+      cursor: default;
+    }
+  }
+}
+
+.ui-switch__input-wrapper {
+  cursor: pointer;
+  height: $ui-switch-thumb-size;
+  position: relative;
+  width: $ui-switch-track-width;
+}
+
+.ui-switch__input {
+  opacity: 0;
+  position: absolute;
+
+  body[modality="keyboard"] &:focus + .ui-switch__thumb {
+    .ui-switch__focus-ring {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.ui-switch__track {
+  background-color: rgba(black, 0.26);
+  border-radius: rem-calc(8px);
+  height: $ui-switch-track-height;
+  position: absolute;
+  top: (($ui-switch-thumb-size - $ui-switch-track-height) / 2);
+  transition: background-color 0.1s linear;
+  width: $ui-switch-track-width;
+  z-index: -1;
+}
+
+.ui-switch__thumb {
+  background-color: $ui-switch-thumb-color;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(black, 0.4);
+  height: $ui-switch-thumb-size;
+  position: absolute;
+  transition-duration: 0.2s;
+  transition-property: background-color, transform;
+  transition-timing-function: ease;
+  width: $ui-switch-thumb-size;
+}
+
+.ui-switch__focus-ring {
+  background-color: rgba(black, 0.1);
+  border-radius: 50%;
+  height: $ui-switch-focus-ring-size;
+  left: -(($ui-switch-focus-ring-size - $ui-switch-thumb-size) / 2);
+  opacity: 0;
+  position: absolute;
+  top: -(($ui-switch-focus-ring-size - $ui-switch-thumb-size) / 2);
+  transform: scale(0);
+  transition: background-color 0.2s ease, transform 0.15s ease, opacity 0.15s ease;
+  width: $ui-switch-focus-ring-size;
+  z-index: -1;
+}
+
+.ui-switch__label-text {
+  cursor: pointer;
+  font-size: rem-calc(15px);
+  margin-left: rem-calc(16px);
+}
+
+// ================================================
+// Switch positions
+// ================================================
+
+.ui-switch--switch-position-right {
+  .ui-switch__label-text {
+    margin-left: 0;
+    margin-right: auto;
+    order: -1;
+  }
+}
+
+// ================================================
+// Colors
+// ================================================
+
+.ui-switch--color-primary {
+  &.is-checked:not(.is-disabled) {
+    .ui-switch__track {
+      background-color: rgba($brand-primary-color, 0.5);
+    }
+
+    .ui-switch__thumb {
+      background-color: $brand-primary-color;
+    }
+
+    .ui-switch__focus-ring {
+      background-color: rgba($brand-primary-color, 0.2);
+    }
+  }
+}
+
+.ui-switch--color-accent {
+  &.is-checked:not(.is-disabled) {
+    .ui-switch__track {
+      background-color: rgba($brand-accent-color, 0.5);
+    }
+
+    .ui-switch__thumb {
+      background-color: $brand-accent-color;
+    }
+
+    .ui-switch__focus-ring {
+      background-color: rgba($brand-accent-color, 0.2);
+    }
+  }
+}
+
+
+/*================================================
+UiTab.vue
+================================================*/
+.ui-tab {
+  outline: none;
+}
+
+
+/*================================================
+UiTabHeaderItem.vue
+================================================*/
+.ui-tab-header-item {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-family: $font-stack;
+  height: rem-calc(48px);
+  justify-content: center;
+  min-width: rem-calc(80px);
+  padding: rem-calc(0 12px);
+  position: relative;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: rgba(black, 0.05);
+  }
+
+  &.is-disabled {
+    background-color: transparent;
+    cursor: default;
+    opacity: 0.4;
+    user-select: none;
+  }
+}
+
+.ui-tab-header-item--type-icon-and-text {
+  display: flex;
+  flex-direction: column;
+  height: rem-calc(72px);
+
+  .ui-tab-header-item__icon {
+    margin-bottom: rem-calc(4px);
+  }
+}
+
+.ui-tab-header-item__text {
+  @include text-truncation;
+  font-size: rem-calc(15px);
+  font-weight: 500;
+}
+
+.ui-tab-header-item__icon {
+  height: rem-calc(24px);
+  width: rem-calc(24px);
+
+  .ui-icon {
+    cursor: inherit;
+  }
+}
+
+
+/*================================================
+UiTabs.vue
+================================================*/
+.ui-tabs {
+  margin-bottom: rem-calc(24px);
+  width: 100%;
+
+  &.is-fullwidth {
+    .ui-tab-header-item {
+      flex-grow: 1;
+    }
+  }
+
+  &.is-raised {
+    border: none;
+    box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
+
+    .ui-tabs__body {
+      border: none;
+    }
+  }
+}
+
+.ui-tabs__header {
+  position: relative;
+  width: 100%;
+}
+
+.ui-tabs__header-items {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.ui-tabs__active-tab-indicator {
+  bottom: 0;
+  box-shadow: 0 -1px 2px rgba(black, 0.05);
+  height: rem-calc(2px);
+  position: absolute;
+  transition: all 0.2s ease;
+}
+
+.ui-tabs__body {
+  background-color: white;
+  border-radius: 0;
+  border: rem-calc(1px) solid $md-grey-200;
+  border-top: 0;
+  margin: 0;
+  padding: rem-calc(16px);
+}
+
+// ================================================
+// Background Colors
+// ================================================
+
+.ui-tabs--background-color-default {
+  .ui-tabs__header {
+    background-color: $md-grey-200;
+  }
+
+  .ui-tab-header-item {
+    body[modality="keyboard"] &:focus {
+      outline: 1px solid $brand-primary-color;
+    }
+  }
+}
+
+.ui-tabs--background-color-primary,
+.ui-tabs--background-color-accent,
+.ui-tabs--background-color-clear {
+  .ui-tab-header-item {
+    body[modality="keyboard"] &:focus {
+      outline: 1px solid white;
+    }
+  }
+
+  .ui-ripple-ink__ink.is-held {
+    opacity: 0.7;
+  }
+}
+
+.ui-tabs--background-color-primary {
+  .ui-tabs__header {
+    background-color: $brand-primary-color;
+  }
+}
+
+.ui-tabs--background-color-accent {
+  .ui-tabs__header {
+    background-color: $brand-accent-color;
+  }
+}
+
+.ui-tabs--background-color-clear {
+  .ui-tabs__header {
+    background-color: transparent;
+
+    & + .ui-tabs__body {
+      border-top: 1px solid $divider-color;
+    }
+  }
+}
+
+// ================================================
+// Text Colors
+// ================================================
+
+.ui-tabs--text-color-black {
+  .ui-tab-header-item {
+    color: rgba(black, 0.54);
+  }
+
+  .ui-tab-header-item__icon {
+    color: rgba(black, 0.54);
+  }
+}
+
+.ui-tabs--text-color-white {
+  .ui-tab-header-item {
+    color: rgba(white, 0.65);
+  }
+
+  .ui-tab-header-item__icon {
+    color: rgba(white, 0.65);
+  }
+}
+
+// ================================================
+// Active Text Colors
+// ================================================
+
+.ui-tabs--text-color-active-white {
+  .ui-tab-header-item.is-active {
+    color: white;
+
+    .ui-tab-header-item__icon {
+      color: white;
+    }
+  }
+}
+
+.ui-tabs--text-color-active-primary {
+  .ui-tab-header-item.is-active {
+    color: $brand-primary-color;
+
+    .ui-tab-header-item__icon {
+      color: $brand-primary-color;
+    }
+  }
+}
+
+.ui-tabs--text-color-active-accent {
+  .ui-tab-header-item.is-active {
+    color: $brand-accent-color;
+
+    .ui-tab-header-item__icon {
+      color: $brand-accent-color;
+    }
+  }
+}
+
+// ================================================
+// Indicator Colors
+// ================================================
+
+.ui-tabs--indicator-color-primary {
+  .ui-tabs__active-tab-indicator {
+    background-color: $brand-primary-color;
+  }
+}
+
+.ui-tabs--indicator-color-accent {
+  .ui-tabs__active-tab-indicator {
+    background-color: $brand-accent-color;
+  }
+}
+
+.ui-tabs--indicator-color-white {
+  .ui-tabs__active-tab-indicator {
+    background-color: white;
+  }
+}
+
+
+/*================================================
+UiToolbar.vue
+================================================*/
+$ui-toolbar-font-size   : rem-calc(18px) !default;
+$ui-toolbar-height      : rem-calc(56px) !default;
+
+.ui-toolbar {
+  align-items: center;
+  display: flex;
+  font-family: $font-stack;
+  font-size: $ui-toolbar-font-size;
+  height: $ui-toolbar-height;
+  padding-left: rem-calc(16px);
+  position: relative;
+
+  &.is-raised {
+    box-shadow: 0 0 2px rgba(black, 0.12), 0 2px 2px rgba(black, 0.2);
+  }
+
+  &:not(.is-raised).ui-toolbar--type-default {
+    border-bottom: rem-calc(1px) solid $divider-color;
+  }
+
+  .ui-icon-button {
+    height: rem-calc(48px);
+    width: rem-calc(48px);
+  }
+}
+
+.ui-toolbar__left {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.ui-toolbar__nav-icon {
+  margin-left: rem-calc(-16px);
+  margin-right: rem-calc(8px);
+}
+
+.ui-toolbar__brand {
+  min-width: rem-calc(160px);
+}
+
+.ui-toolbar__brand-text {
+  flex-grow: 1;
+  padding-right: rem-calc(8px);
+}
+
+.ui-toolbar__body {
+  display: flex;
+  flex-grow: 1;
+
+  &.has-brand-divider {
+    border-left-style: solid;
+    border-left-width: rem-calc(1px);
+    padding-left: rem-calc(24px);
+  }
+}
+
+.ui-toolbar__right {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.ui-toolbar__progress {
+  bottom: 0;
+  height: rem-calc(3px);
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+// ================================================
+// Types
+// ================================================
+
+.ui-toolbar--type-default {
+  background-color: white;
+}
+
+.ui-toolbar--type-colored {
+  background-color: $brand-primary-color;
+}
+
+.ui-toolbar--type-clear {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+// ================================================
+// Text colors
+// ================================================
+
+.ui-toolbar--text-color-black {
+  color: $primary-text-color;
+
+  .ui-toolbar__body {
+    border-left-color: rgba(black, 0.15);
+  }
+}
+
+.ui-toolbar--text-color-white {
+  color: white;
+
+  .ui-toolbar__body {
+    border-color: rgba(white, 0.4);
+  }
+}
+
+// ================================================
+// Progress positions
+// ================================================
+
+.ui-toolbar--progress-position-top {
+  .ui-toolbar__progress {
+    top: 0;
+  }
+}
+
+
+/*================================================
+UiTextbox.vue
+================================================*/
+.ui-textbox {
+  align-items: flex-start;
+  display: flex;
+  font-family: $font-stack;
+  margin-bottom: $ui-input-margin-bottom;
+
+  &:hover:not(.is-disabled) {
+    .ui-textbox__label-text {
+      color: $ui-input-label-color--hover;
+    }
+
+    .ui-textbox__input,
+    .ui-textbox__textarea {
+      border-bottom-color: $ui-input-border-color--hover;
+    }
+  }
+
+  &.is-active:not(.is-disabled) {
+    .ui-textbox__input,
+    .ui-textbox__textarea {
+      border-bottom-color: $ui-input-border-color--active;
+      border-bottom-width: $ui-input-border-width--active;
+    }
+
+    .ui-textbox__label-text,
+    .ui-textbox__icon-wrapper .ui-icon {
+      color: $ui-input-label-color--active;
+    }
+  }
+
+  &.has-label {
+    .ui-textbox__icon-wrapper {
+      padding-top: $ui-input-icon-margin-top--with-label;
+    }
+  }
+
+  &.has-counter {
+    .ui-textbox__feedback-text {
+      padding-right: rem-calc(48px);
+    }
+  }
+
+  &.has-floating-label {
+    .ui-textbox__label-text {
+      // Behaves like a block, but width is the width of its content.
+      // Needed here so label doesn't overflow parent when scaled.
+      display: table;
+
+      &.is-inline {
+        color: $ui-input-label-color; // So the hover styles don't override it
+        cursor: text;
+        transform: translateY($ui-input-label-top--inline) scale(1.1);
+      }
+
+      &.is-floating {
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  &.is-invalid:not(.is-disabled) {
+    .ui-textbox__label-text,
+    .ui-textbox__icon-wrapper .ui-icon,
+    .ui-textbox__counter {
+      color: $ui-input-label-color--invalid;
+    }
+
+    .ui-textbox__input,
+    .ui-textbox__textarea {
+      border-bottom-color: $ui-input-border-color--invalid;
+    }
+
+    .ui-textbox__feedback {
+      color: $ui-input-feedback-color--invalid;
+    }
+  }
+
+  &.is-disabled {
+    .ui-textbox__input,
+    .ui-textbox__textarea {
+      border-bottom-style: $ui-input-border-style--disabled;
+      border-bottom-width: $ui-input-border-width--active;
+      color: $ui-input-text-color--disabled;
+    }
+
+    .ui-textbox__icon-wrapper .ui-icon {
+      opacity: $ui-input-icon-opacity--disabled;
+    }
+
+    .ui-textbox__feedback {
+      opacity: $ui-input-feedback-opacity--disabled;
+    }
+  }
+}
+
+.ui-textbox__label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.ui-textbox__icon-wrapper {
+  flex-shrink: 0;
+  margin-right: rem-calc(12px);
+  padding-top: $ui-input-icon-margin-top;
+
+  .ui-icon {
+    color: $ui-input-icon-color;
+  }
+}
+
+.ui-textbox__content {
+  flex-grow: 1;
+}
+
+.ui-textbox__label-text {
+  color: $ui-input-label-color;
+  font-size: $ui-input-label-font-size;
+  line-height: $ui-input-label-line-height;
+  margin-bottom: $ui-input-label-margin-bottom;
+  transform-origin: left;
+  transition: color 0.1s ease, transform 0.2s ease;
+}
+
+.ui-textbox__input,
+.ui-textbox__textarea {
+  background: none;
+  border: none;
+  border-bottom-color: $ui-input-border-color;
+  border-bottom-style: solid;
+  border-bottom-width: $ui-input-border-width;
+  border-radius: 0;
+  color: $ui-input-text-color;
+  cursor: auto;
+  display: block;
+  font-family: $font-stack;
+  font-size: $ui-input-text-font-size;
+  font-weight: normal;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  transition: border 0.1s ease;
+  width: 100%;
+}
+
+.ui-textbox__input {
+  height: $ui-input-height;
+}
+
+.ui-textbox__textarea {
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-bottom: rem-calc(6px);
+  resize: vertical;
+}
+
+.ui-textbox__feedback {
+  color: $ui-input-feedback-color;
+  font-size: $ui-input-feedback-font-size;
+  line-height: $ui-input-feedback-line-height;
+  margin: 0;
+  padding-top: $ui-input-feedback-padding-top;
+  position: relative;
+}
+
+.ui-textbox__counter {
+  position: absolute;
+  right: 0;
+  top: $ui-input-feedback-padding-top;
+}
+
+// ================================================
+// Icon position
+// ================================================
+
+.ui-textbox--icon-position-right {
+  .ui-textbox__icon-wrapper {
+    margin-left: rem-calc(8px);
+    margin-right: 0;
+    order: 1;
+  }
+}
+
+
+/*================================================
+UiTooltip.vue
+================================================*/
+$tooltip-content-margin: rem-calc(4px) !default;
+
+.ui-tooltip {
+  line-height: 1;
+}
+
+// The following classes are unprefixed and not BEM
+// because they are generated by Tether Tooltip
+
+.tooltip-element,
+.tooltip-element:after,
+.tooltip-element:before,
+.tooltip-element *,
+.tooltip-element *:after,
+.tooltip-element *:before {
+  box-sizing: border-box;
+}
+
+.tooltip-element {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.2s;
+}
+
+.tooltip-element.tooltip-open {
+  display: block;
+}
+
+.tooltip-element.tooltip-after-open {
+  opacity: 1;
+}
+
+.tooltip-element.ui-tooltip--theme-default {
+  max-height: 100%;
+  max-width: 100%;
+  pointer-events: none;
+  z-index: $z-index-tooltip;
+
+  .tooltip-content {
+    align-items: center;
+    background: $md-grey-900;
+    border-radius: $ui-default-border-radius;
+    color: white;
+    display: flex;
+    font-family: inherit;
+    font-size: rem-calc(13px);
+    height: rem-calc(26px);
+    line-height: 1;
+    opacity: 0.9;
+    padding: rem-calc(0 8px);
+    position: relative;
+  }
+
+  &.tooltip-element-attached-bottom.tooltip-element-attached-center .tooltip-content {
+    margin-bottom: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-top.tooltip-element-attached-center .tooltip-content {
+    margin-top: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-right.tooltip-element-attached-middle .tooltip-content {
+    margin-right: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-left.tooltip-element-attached-middle .tooltip-content {
+    margin-left: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-top.tooltip-element-attached-left.tooltip-target-attached-bottom .tooltip-content {
+    margin-top: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-top.tooltip-element-attached-right.tooltip-target-attached-bottom .tooltip-content {
+    margin-top: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-bottom.tooltip-element-attached-left.tooltip-target-attached-top .tooltip-content {
+    margin-bottom: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-bottom.tooltip-element-attached-right.tooltip-target-attached-top .tooltip-content {
+    margin-bottom: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-top.tooltip-element-attached-right.tooltip-target-attached-left .tooltip-content {
+    margin-right: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-top.tooltip-element-attached-left.tooltip-target-attached-right .tooltip-content {
+    margin-left: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-bottom.tooltip-element-attached-right.tooltip-target-attached-left .tooltip-content {
+    margin-right: $tooltip-content-margin;
+  }
+
+  &.tooltip-element-attached-bottom.tooltip-element-attached-left.tooltip-target-attached-right .tooltip-content {
+    margin-left: $tooltip-content-margin;
+  }
+}
+
+

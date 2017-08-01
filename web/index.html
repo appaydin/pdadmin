@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>pdAdmin Main Interface</title>
+
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+    <!-- Vue Application -->
+    <div id="app">
+        <a onclick="Router.navigate('/admin')">/admin</a>
+        <a onclick="Router.navigate('/admin/asdsa')">/admin/asdsad</a>
+
+        <a onclick="Router.navigate('/auth')">/auth</a>
+        <a onclick="Router.navigate('/auth/')">/auth/</a>
+        <a onclick="Router.navigate('/auth/login')">/auth/login</a>
+
+        <a onclick="Router.navigate('/asdas')">/auth</a>
+        <a onclick="Router.navigate('/blog/')">/auth/</a>
+        <a onclick="Router.navigate('/blog/asdsadas.html')">/auth/login</a>
+    </div>
+
+
+    <script>
+      const CONST = {
+        ROOT_URL: null,
+        USE_HASH: false,
+        API_URL: 'http://pdadmin.local/api',
+        PANELS: [
+          { path: '/admin', name: 'admin', app: ['/interface/admin/default/dist/app.min.js', '/interface/admin/default/dist/app.min.css'] },
+          { path: '/auth', name: 'auth', app: ['/interface/auth/default/dist/app.min.js', '/interface/auth/default/dist/app.min.css'] },
+        ]
+      }
+      const CONST_API_URL = "http://pdadmin.local/api"
+      const CONST_API_PREFIX = '/api'
+      const CONST_DEV_MODE = true
+      const CONST_NOTIFY_DURATION = 4000
+      const CONST_HEAD = {
+        title: {
+          text        : 'Powerful & Flexible Single Page Application',
+          pattern     : '%T - pdAdmin'
+        },
+        meta: [
+          {name:"description", content:"açuklama asdasda"},
+          {name:"description2", content:"açuklama asdasda"}
+        ]
+      }
+    </script>
+    <script src="pdAdmin.js"></script>
+</body>
+</html>

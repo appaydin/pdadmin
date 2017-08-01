@@ -1,0 +1,20 @@
+@import 'src/util';
+@import 'src/mixins';
+@import 'variables';
+@import "keen-vue";
+
+.ui-textbox.has-floating-label .ui-textbox__label-text.is-inline{
+  transform: translateY(1.325rem) scale(1.1)
+}
+.ui-fab__icon{
+  .text{
+    font-size: rem-calc(20px);
+    font-weight: 400;
+  }
+}
+.ui-button{
+  font-weight: 400;
+}
+.ui-alert{
+  border-radius: $ui-default-border-radius;
+}

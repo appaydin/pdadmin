@@ -1,0 +1,11 @@
+{
+  "name": "pdadmin",
+  "version": "1.0.0",
+  "description": "pdAdmin Main Interface",
+  "main": "pdAdmin.js",
+  "author": "Ramazan APAYDIN",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0"
+  }
+}

@@ -1,0 +1,10 @@
+admin_homepage:
+    path:     /admin
+    defaults:
+        _controller: AdminBundle:Default:index
+        _format: json
+
+admin_test:
+    path:   /test
+    defaults:
+        _controller: AdminBundle:Default:test

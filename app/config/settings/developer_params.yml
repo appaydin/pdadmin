@@ -1,0 +1,14 @@
+parameters:
+    developer_mode: true
+    developer_profiler_toolbar: true
+    developer_profiler_position: bottom
+    developer_profiler_intercept_redirect: false
+    developer_profiler_exclude_ajaxpath: '^/(app(_[\w]+)?\.php/)?_wdt'
+    developer_profiler_collect: true
+    developer_profiler_only_exception: false
+    developer_profiler_only_master_request: false
+    developer_profiler_matcher: false
+    developer_profiler_matcher_service: 'Süper Admin'
+    developer_profiler_matcher_ips: null
+    developer_error_trace: true
+    developer_error_notify_delay: 7000

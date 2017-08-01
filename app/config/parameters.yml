@@ -1,0 +1,24 @@
+parameters:
+    database_host: localhost
+    database_port: 3306
+    database_name: pdadmin
+    database_user: root
+    database_password: root
+    locale: en
+
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    secret: 405363813d0d73da45f58cd1715bbd4e540b5d42
+
+    router_api:         api
+    router_login:       login
+    router_logout:      logout
+    router_register:    register
+    router_reset:       reset
+
+    jwt_private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
+    jwt_public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'
+    jwt_key_pass_phrase:  'pdadmin2017'
+    jwt_token_ttl:        86400

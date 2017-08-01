@@ -1,0 +1,34 @@
+services:
+    # Serializer - Normalizer
+    pd.normalizer.form:
+        class: AdminBundle\Serializer\FormNormalizer
+        arguments: ['@translator.default']
+        tags:
+            - { name: serializer.normalizer }
+    pd.normalizer.object:
+        class: AdminBundle\Serializer\ObjectNormalizer
+        tags:
+            - { name: serializer.normalizer }
+
+    # Kernel Request - Response
+    pd.request.transformer:
+        class: AdminBundle\Listener\RequestTransformerListener
+        arguments: ['@serializer']
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
+    pd.response.transformer:
+        class: AdminBundle\Listener\ResponseTransformerListener
+        arguments: ['@serializer']
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
+
+    # Exception Listener
+    pd.kernel.exception:
+        class: AdminBundle\Listener\ExceptionListener
+        arguments: ['@service_container', '@serializer']
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+    # Utils
+    pd.utils:
+        class: AdminBundle\Utils\Utility

@@ -1,0 +1,6 @@
+parameters:
+    set_general_panel_suffix: PDAdmin
+    set_general_panel_description: 'pdAdmin for Symfony 3'
+    set_general_panel_tags: 'pdadmin, symfony 3'
+    locale: tr
+    set_general_title_pattern: '%T - %P'

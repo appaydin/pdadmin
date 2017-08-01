@@ -1,0 +1,4 @@
+parameters:
+    set_template_logo: [2017/01/10/logo35874f1fe4d7f1.png]
+    set_template_favicon: [2017/01/10/favicon85874f1db9f769.ico]
+    set_template_admin: default

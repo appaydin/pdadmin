@@ -1,0 +1,29 @@
+fos_user_security_login:
+    path: "auth/%router_login%"
+    defaults:
+        _controller: AccountBundle:RestSecurity:login
+    methods: [GET, POST]
+
+fos_user_registration_register:
+    path: "auth/%router_register%"
+    defaults:
+        _controller: AccountBundle:RestRegistration:register
+    methods: [GET,POST]
+
+fos_user_registration_confirm:
+    path: "auth/%router_register%/confirm/{token}"
+    defaults:
+        _controller: AccountBundle:RestRegistration:confirm
+    methods: [GET]
+
+fos_user_registration_check_email:
+    path: "auth/%router_register%/check"
+    defaults:
+        _controller: AccountBundle:RestRegistration:checkEmail
+    methods: [GET]
+
+user_profile:
+    path: "profile"
+    defaults:
+        _controller: AccountBundle:RestSecurity:profile
+    methods: [GET]
